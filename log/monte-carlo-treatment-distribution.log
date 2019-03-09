@@ -1,0 +1,280 @@
+-----------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/smorgan/Documents/GitHub/tess-civil-liberties/log/monte-carlo-treatment-dis
+> tribution.log
+  log type:  text
+ opened on:   9 Mar 2019, 12:42:44
+
+. 
+. *******************************************************************************
+. // Monte Carlo
+. *******************************************************************************
+. 
+. *** Set up
+. 
+. local sample_size = 2019 
+
+. local number_of_polls = 1000000
+
+. 
+. program conduct_poll, rclass
+  1.   args n
+  2.   drop _all
+  3.   
+.   quietly set obs `n'
+  4.   gen rand = runiform(0, 1)
+  5.   gen treat = 1
+  6.   replace treat = 2 if (rand > 1/3) & (rand <= 2/3)
+  7.   replace treat = 3 if (rand > 2/3) & (rand <= 1)
+  8.   quietly tab treat, gen(treat) matcell(cells)
+  9. 
+.   quietly summarize treat1
+ 10.   return scalar meant1 = r(mean)
+ 11.   quietly summarize treat2
+ 12.   return scalar meant2 = r(mean)
+ 13.   quietly summarize treat3
+ 14.   return scalar meant3 = r(mean)
+ 15.   
+.   matrix list cells
+ 16.   mata: st_numscalar("max", max(st_matrix("cells")))
+ 17.   return scalar maxtreat = max
+ 18.   mata: st_numscalar("min", min(st_matrix("cells")))
+ 19.   return scalar mintreat = min
+ 20.   return scalar midtreat = `n' - min - max
+ 21.   matrix drop cells
+ 22. end
+
+. 
+. conduct_poll `sample_size'
+(666 real changes made)
+(706 real changes made)
+
+cells[3,1]
+     c1
+r1  647
+r2  666
+r3  706
+
+. return list
+
+scalars:
+           r(midtreat) =  666
+           r(mintreat) =  647
+           r(maxtreat) =  706
+             r(meant3) =  .3496780584447746
+             r(meant2) =  .3298662704309064
+             r(meant1) =  .320455671124319
+
+. 
+. simulate meant1=r(meant1) meant2=r(meant2) meant3=r(meant3) ///
+>          mintreat=r(mintreat) midtreat=r(midtreat) maxtreat=r(maxtreat), ///
+>                  reps(`number_of_polls') dots(1000): conduct_poll `sample_size'
+
+      command:  conduct_poll 2019
+       meant1:  r(meant1)
+       meant2:  r(meant2)
+       meant3:  r(meant3)
+     mintreat:  r(mintreat)
+     midtreat:  r(midtreat)
+     maxtreat:  r(maxtreat)
+
+Simulations (1000000)
+----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5 
+.................................................. 50000
+.................................................. 100000
+.................................................. 150000
+.................................................. 200000
+.................................................. 250000
+.................................................. 300000
+.................................................. 350000
+.................................................. 400000
+.................................................. 450000
+.................................................. 500000
+.................................................. 550000
+.................................................. 600000
+.................................................. 650000
+.................................................. 700000
+.................................................. 750000
+.................................................. 800000
+.................................................. 850000
+.................................................. 900000
+.................................................. 950000
+.................................................. 1000000
+
+. 
+. summarize, d
+
+                          r(meant1)
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%     .3090639       .2842992
+ 5%      .315998       .2852897
+10%     .3199604        .285785       Obs           1,000,000
+25%     .3263992       .2862803       Sum of Wgt.   1,000,000
+
+50%     .3333333                      Mean           .3333423
+                        Largest       Std. Dev.       .010491
+75%     .3402674       .3818722
+90%     .3467063       .3823675       Variance       .0001101
+95%     .3506686       .3823675       Skewness       .0175018
+99%     .3580981       .3838534       Kurtosis       3.004904
+
+                          r(meant2)
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%     .3090639       .2763744
+ 5%      .315998       .2818227
+10%     .3199604       .2833086       Obs           1,000,000
+25%     .3263992       .2847944       Sum of Wgt.   1,000,000
+
+50%     .3333333                      Mean           .3333395
+                        Largest       Std. Dev.      .0104915
+75%     .3402674       .3818722
+90%     .3467063       .3833581       Variance       .0001101
+95%     .3506686       .3843487       Skewness       .0144589
+99%     .3580981       .3853393       Kurtosis       3.004785
+
+                          r(meant3)
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%     .3090639       .2793462
+ 5%      .315998       .2828133
+10%     .3199604       .2867756       Obs           1,000,000
+25%     .3263992       .2872709       Sum of Wgt.   1,000,000
+
+50%     .3333333                      Mean           .3333183
+                        Largest       Std. Dev.       .010486
+75%     .3402674       .3793958
+90%     .3467063       .3803863       Variance         .00011
+95%     .3506686       .3808816       Skewness       .0177881
+99%     .3576028       .3843487       Kurtosis       2.982671
+
+                         r(mintreat)
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%          616            558
+ 5%          628            564
+10%          634            569       Obs           1,000,000
+25%          644            571       Sum of Wgt.   1,000,000
+
+50%          653                      Mean           651.1025
+                        Largest       Std. Dev.      12.26951
+75%          660            673
+90%          665            673       Variance       150.5409
+95%          668            673       Skewness      -.8129213
+99%          671            673       Kurtosis       3.664932
+
+                         r(midtreat)
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%          651            624
+ 5%          658            625
+10%          662            626       Obs           1,000,000
+25%          668            626       Sum of Wgt.   1,000,000
+
+50%          673                      Mean           672.8983
+                        Largest       Std. Dev.      8.812549
+75%          678            719
+90%          684            720       Variance       77.66101
+95%          688            721       Skewness       -.020551
+99%          694            729       Kurtosis       3.516407
+
+                         r(maxtreat)
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%          675            673
+ 5%          678            673
+10%          681            673       Obs           1,000,000
+25%          686            673       Sum of Wgt.   1,000,000
+
+50%          693                      Mean           694.9992
+                        Largest       Std. Dev.      12.40517
+75%          702            775
+90%          712            776       Variance       153.8882
+95%          718            776       Skewness       .8370853
+99%          731            778       Kurtosis        3.73678
+
+. 
+. *******************************************************************************
+. // Examine observed distribution and calculate Monte Carlo estimates
+. *******************************************************************************
+. 
+. /*
+> use data/tess030_morgan_6march19.dta
+> tab P_CONDITION
+> tab P_CONDITION [aweight=weight]
+> 
+> . tab P_CONDITION
+> 
+>  DATA-ONLY: |
+>    Randomly |
+>    assigned |
+>   condition |
+> for TESS030 |      Freq.     Percent        Cum.
+> ------------+-----------------------------------
+>           1 |        709       35.12       35.12
+>           2 |        660       32.69       67.81
+>           3 |        650       32.19      100.00
+> ------------+-----------------------------------
+>       Total |      2,019      100.00
+> 
+> . tab P_CONDITION [aweight=weight]
+> 
+>  DATA-ONLY: |
+>    Randomly |
+>    assigned |
+>   condition |
+> for TESS030 |      Freq.     Percent        Cum.
+> ------------+-----------------------------------
+>           1 | 727.665546       36.04       36.04
+>           2 | 669.680965       33.17       69.21
+>           3 | 621.653489       30.79      100.00
+> ------------+-----------------------------------
+>       Total |      2,019      100.00
+> */
+. 
+. gen ltewtmin = (min(meant1, meant2, meant3) <= 621.653489/2019)
+
+. gen lte650 = (mintreat <= 650)
+
+. gen gte709 = (maxtreat >= 709)
+
+. gen gtewtmax = (max(meant1, meant2, meant3) >= 727.665546/2019)
+
+. 
+. summarize lt* gt*
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+    ltewtmin |  1,000,000      .02168    .1456365          0          1
+      lte650 |  1,000,000     .423112    .4940531          0          1
+      gte709 |  1,000,000     .141797     .348842          0          1
+    gtewtmax |  1,000,000     .015737    .1244563          0          1
+
+. 
+. *******************************************************************************
+. // Save simulated data
+. *******************************************************************************
+. 
+. compress
+  variable mintreat was float now int
+  variable midtreat was float now int
+  variable maxtreat was float now int
+  variable ltewtmin was float now byte
+  variable lte650 was float now byte
+  variable gte709 was float now byte
+  variable gtewtmax was float now byte
+  (18,000,000 bytes saved)
+
+. save civlib-1mil-experiments.dta, replace
+(note: file civlib-1mil-experiments.dta not found)
+file civlib-1mil-experiments.dta saved
+
+. 
+. log close
+      name:  <unnamed>
+       log:  /Users/smorgan/Documents/GitHub/tess-civil-liberties/log/monte-carlo-treatment-dis
+> tribution.log
+  log type:  text
+ closed on:   9 Mar 2019, 13:04:31
+-----------------------------------------------------------------------------------------------

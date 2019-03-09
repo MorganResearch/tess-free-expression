@@ -1,0 +1,198 @@
+-----------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/smorgan/Documents/GitHub/tess-civil-liberties/log/monte-carlo-treatment-dis
+> tribution-graph.log
+  log type:  text
+ opened on:   9 Mar 2019, 13:56:34
+
+. 
+. use data/civlib-1mil-experiments.dta, replace
+(simulate: conduct_poll)
+
+. 
+. 
+. * Graph setup
+. 
+. local sample_size = 2019 
+
+. local number_of_polls = 10000
+
+. 
+. sample `number_of_polls', count
+(990,000 observations deleted)
+
+. 
+. gen range = maxtreat - mintreat
+
+. gen upbias = maxtreat - 673
+
+. gen downbias = mintreat - 673
+
+. gen maxp = max(meant1, meant2, meant3) 
+
+. gen minp = min(meant1, meant2, meant3)
+
+. gen rangep = maxp - minp
+
+. gen max_upbias = maxp - 1/3
+
+. gen min_downbias = minp - 1/3
+
+. summ
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      meant1 |     10,000    .3332947    .0104863   .2961862   .3709757
+      meant2 |     10,000    .3335134    .0103744   .2961862   .3769193
+      meant3 |     10,000     .333192    .0105366   .2902427   .3734522
+    mintreat |     10,000    651.1943     12.2596        586        673
+    midtreat |     10,000    672.8923    8.794023        636        708
+-------------+---------------------------------------------------------
+    maxtreat |     10,000    694.9134    12.50324        673        761
+    ltewtmin |     10,000       .0223    .1476648          0          1
+      lte650 |     10,000        .422    .4939032          0          1
+      gte709 |     10,000       .1404    .3474189          0          1
+    gtewtmax |     10,000        .017    .1292775          0          1
+-------------+---------------------------------------------------------
+       range |     10,000     43.7191    23.15001          0        160
+      upbias |     10,000     21.9134    12.50324          0         88
+    downbias |     10,000    -21.8057     12.2596        -87          0
+        maxp |     10,000    .3441869    .0061928   .3333333   .3769193
+        minp |     10,000    .3225331    .0060721   .2902427   .3333333
+-------------+---------------------------------------------------------
+      rangep |     10,000    .0216538    .0114661          0   .0792471
+  max_upbias |     10,000    .0108536    .0061928   9.93e-09   .0435859
+min_downbias |     10,000   -.0108002    .0060721  -.0430906   9.93e-09
+
+. 
+. 
+. 
+. * Graph
+. 
+. #delimit ;
+delimiter now ;
+. kdensity range, 
+>   title(Monte Carlo Simulation of `number_of_polls' Polls (n = `sample_size'))
+>   subtitle("Range of Max to Min) 
+>   t2title("asdf1")
+>   t1title("asdf2")
+>   ytitle("asdf3") xtitle("asdf4") 
+>   normal normopts(lc(black))  
+>   lcolor(navy%75) fcolor(navy%20)
+>   name(kd_range)
+>   legend(off);
+> 
+>   
+> #delimit cr
+> 
+> */
+> 
+> * MC results
+> summ mean
+> local mc_mean = round(`r(mean)', .0001)
+> local mc_moe = round(`r(sd)' * 1.96, .0001)
+> display `mc_mean'
+> display `mc_moe'
+> 
+> * Graph locations
+> local moe_l = `proportion_agree' - .03
+> local moe_u = `proportion_agree' + .03
+> local range_l = `proportion_agree' - .1
+> local range_u = `proportion_agree' + .1 
+> 
+> #delimit ;
+> 
+> dotplot mean, 
+>   title(Monte Carlo Simulation of `number_of_polls' Polls (n = `sample_size'))
+>   subtitle(True proportion agree = `proportion_agree') 
+>   t2title("MC mean proportion agree = `mc_mean'")
+>   t1title("MC margin of error = `mc_moe'")
+>   ytitle("Estimated proportion agree (in bins)") xtitle("Number of polls") 
+>   yline(`moe_l' `moe_u') ylabel(`range_l'(.05)`range_u') 
+>   msize(tiny)
+>   mcolor(navy)
+>   note("Notes:  This is a dotplot graph from Stata. Red lines are +/- .03 (the true margin of
+>  error for n = 1067).")
+>   name(dot_moe)
+>   ;
+> hist mean, 
+>   title(Monte Carlo Simulation of `number_of_polls' Polls (n = `sample_size'))
+>   subtitle(True proportion agree = `proportion_agree') 
+>   t2title("MC mean proportion agree = `mc_mean'")
+>   t1title("MC margin of error = `mc_moe'")
+>   ytitle("Percentage of polls") xtitle("Estimated proportion agree (in bins)") 
+>   bin(20) percent 
+>   lcolor(navy) lwidth(vthin) fcolor(navy%75)
+>   normal normopts(lc(black)) 
+>   xline(`moe_l' `moe_u') xlabel(`range_l'(.05)`range_u') 
+>   note("Notes:  This is a historgram from Stata with 20 bins and a superimposed normal."
+>              "Red lines are +/- .03 (the true margin of error for n = 1067).")
+>   name(hist_moe)
+>   ;
+> 
+> kdensity mean, 
+>   title(Monte Carlo Simulation of `number_of_polls' Polls (n = `sample_size'))
+>   subtitle(True proportion agree = `proportion_agree') 
+>   t2title("MC mean proportion agree = `mc_mean'")
+>   t1title("MC margin of error = `mc_moe'")
+>   ytitle(" ") xtitle("Estimated proportion agree") 
+>   normal normopts(lc(black))  
+>   lcolor(navy%75) fcolor(navy%20)
+>   xline(`moe_l' `moe_u') xlabel(`range_l'(.05)`range_u') name(kd_moe)
+>   legend(off)
+>   note("Notes:  This is a kdensity graph from Stata with a superimposed normal."
+>        "Red lines are +/- .03 (the true margin of error for n = 1067).")
+>   ;
+> 
+> #delimit cr
+> 
+> log close
+
+end of do-file
+
+. do "/var/folders/m_/l1vkbxx13h37fq0k94zqcym80000gp/T//SD59856.000000"
+
+. 
+. #delimit ;
+delimiter now ;
+. kdensity range, 
+>   title(Monte Carlo Simulation of `number_of_polls' Polls (n = `sample_size'))
+>   subtitle("Range of Max to Min) 
+>   t2title("asdf1")
+>   t1title("asdf2")
+>   ytitle("asdf3") xtitle("asdf4") 
+>   normal normopts(lc(black))  
+>   lcolor(navy%75) fcolor(navy%20)
+>   name(kd_range)
+>   legend(off);
+> 
+> ;
+> ;
+>   
+> #delimit cr
+
+end of do-file
+
+. do "/var/folders/m_/l1vkbxx13h37fq0k94zqcym80000gp/T//SD59856.000000"
+
+. #delimit asdf
+delimiter now ;
+. kdensity range, 
+>   title(Monte Carlo Simulation of `number_of_polls' Polls (n = `sample_size'))
+>   subtitle("Range of Max to Min) 
+>   t2title("asdf1")
+>   t1title("asdf2")
+>   ytitle("asdf3") xtitle("asdf4") 
+>   normal normopts(lc(black))  
+>   lcolor(navy%75) fcolor(navy%20)
+>   name(kd_range)
+>   legend(off) asdf
+> 
+> ;
+> ;
+>   
+> #delimit cr
+
+end of do-file
+
+. exit, clear
