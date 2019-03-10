@@ -6,13 +6,16 @@ cls
 
 log using log/mk-tess-civ-lib.log, replace
 
+********************************************************************************
+*** Load raw data
+********************************************************************************
+
 use data/tess030_morgan_6march19.dta
-
-********************************************************************************
-*** Generate variables for analysis
-********************************************************************************
-
 rename *, lower
+
+********************************************************************************
+*** Code core experimental variables
+********************************************************************************
 
 *** outcome variables
 
@@ -44,7 +47,6 @@ foreach var of varlist mclib iclib irllib {
  tab `var' [aweight=weight]
 }
 
-
 *** treatment variables
 
 rename p_condition treat
@@ -64,31 +66,48 @@ foreach dom in `domain' {
   replace `dom' = mc`dom' if mc == 1 & mc`dom' < .
   replace `dom' = ic`dom' if ic == 1 & ic`dom' < .
   replace `dom' = irl`dom' if irl == 1 & irl`dom' < .
+  label values `dom' tolerant
 }
 
-*** analysis, first cut:
-set cformat %9.3f
- 
-corr `domain' [aweight=weight]
-bys treat: corr `domain' [aweight=weight]
+********************************************************************************
+*** Recode AmeriSpeak demographics, etc., and organize
+********************************************************************************
 
-foreach dom in `domain' {
+***convert strings and impose order
 
-regress `dom' i.treat [pweight=weight]
-margins, dydx(treat)
-*regress `dom' i.treat i.partyid7 [pweight=weight]
-*margins, dydx(treat)
-regress `dom' i.treat##c.partyid7 [pweight=weight]
-margins, dydx(treat partyid7)
+encode state, gen(tmp)
+drop state
+rename tmp state
 
-logit `dom' i.treat [pweight=weight]
-margins, dydx(treat)
-*logit `dom' i.treat i.partyid7 [pweight=weight]
-*margins, dydx(treat)
-logit `dom' i.treat##c.partyid7 [pweight=weight]
-margins, dydx(treat partyid7)
+encode device, gen(tmp)
+drop device
+rename tmp device
 
-}
+*** code dk's and other similar as missing
+recode ideo 8 = .
+
+*** recode
+rename gender female
+recode female 1 = 0 2 = 1
+
+*** paradata recode
+drop surv_mode // because constant (all web, no phone)
+recode duration 0 = 1  1/3 = 2 4/6 = 3 7/9 =4 10/max = 5, gen(durint)
+label define durint 1 "lt 1 min" 2 "1-3 mins" 3 "4-6 mins" 4 "7-9 mins" ///
+  5 "10 or more mins" 
+label values durint durint
+tab durint device, col
+
+order caseid startdt enddt duration weight state treat mc ic irl spk col ///
+      lib mcspk-irllib age hh* device durint
+	  
+codebook, c
+
+********************************************************************************
+*** Save data file for analysis
+********************************************************************************
+
+save data/tess-civ-lib.dta, replace
 
 log close
 

@@ -1,0 +1,369 @@
+-----------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/smorgan/Documents/GitHub/tess-civil-liberties/log/analyze-experimental-resu
+> lts.log
+  log type:  text
+ opened on:  10 Mar 2019, 13:11:52
+
+. 
+. use data/tess-civ-lib.dta
+
+. 
+. ********************************************************************************
+. *** Basic treatment effect analysis
+. ********************************************************************************
+. 
+. local domain spk col lib 
+
+. 
+. *** analysis, first cut:
+. set cformat %9.3f
+
+.  
+. corr `domain' [aweight=weight]
+(sum of wgt is 2,006.2353708017)
+(obs=2,005)
+
+             |      spk      col      lib
+-------------+---------------------------
+         spk |   1.0000
+         col |   0.4948   1.0000
+         lib |   0.4078   0.2767   1.0000
+
+
+. bys treat: corr `domain' [aweight=weight]
+
+-----------------------------------------------------------------------------------------------
+-> treat = mc
+(sum of wgt is 721.2025177945)
+(obs=700)
+
+             |      spk      col      lib
+-------------+---------------------------
+         spk |   1.0000
+         col |   0.4333   1.0000
+         lib |   0.3924   0.2744   1.0000
+
+
+-----------------------------------------------------------------------------------------------
+-> treat = ic
+(sum of wgt is 665.2614538197)
+(obs=656)
+
+             |      spk      col      lib
+-------------+---------------------------
+         spk |   1.0000
+         col |   0.5871   1.0000
+         lib |   0.4005   0.2773   1.0000
+
+
+-----------------------------------------------------------------------------------------------
+-> treat = irl
+(sum of wgt is 619.7713991875)
+(obs=649)
+
+             |      spk      col      lib
+-------------+---------------------------
+         spk |   1.0000
+         col |   0.4702   1.0000
+         lib |   0.4327   0.2826   1.0000
+
+
+
+. 
+. 
+. estimates clear
+
+. foreach dom in `domain' {
+  2. 
+. regress `dom' i.treat [pweight=weight]
+  3. estimates store `dom'_r1
+  4. margins, dydx(*) post
+  5. estimates store `dom'_rm1
+  6. 
+. /*
+> regress `dom' i.treat c.partyid7 [pweight=weight]
+> estimates store `dom'_r2
+> margins, dydx(*) post
+> estimates store `dom'_rm2
+> */
+. 
+. regress `dom' i.treat##c.partyid7 [pweight=weight]
+  7. estimates store `dom'_r3
+  8. margins, dydx(*) post
+  9. estimates store `dom'_rm3
+ 10. /*
+> regress `dom' i.treat c.ideo [pweight=weight]
+> estimates store `dom'_r4
+> margins, dydx(*) post
+> estimates store `dom'_rm4
+> 
+> 
+> regress `dom' i.treat##c.ideo [pweight=weight]
+> estimates store `dom'_r5
+> margins, dydx(*) post
+> estimates store `dom'_rm5
+> */
+. }
+(sum of wgt is 2,015.9584942246)
+
+Linear regression                               Number of obs     =      2,016
+                                                F(2, 2013)        =       2.17
+                                                Prob > F          =     0.1143
+                                                R-squared         =     0.0042
+                                                Root MSE          =     .49647
+
+------------------------------------------------------------------------------
+             |               Robust
+         spk |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       treat |
+         ic  |     -0.078      0.037    -2.08   0.038       -0.151      -0.004
+        irl  |     -0.034      0.039    -0.87   0.383       -0.111       0.043
+             |
+       _cons |      0.483      0.026    18.61   0.000        0.432       0.534
+------------------------------------------------------------------------------
+
+Conditional marginal effects                    Number of obs     =      2,016
+Model VCE    : Robust
+
+Expression   : Linear prediction, predict()
+dy/dx w.r.t. : 2.treat 3.treat
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       treat |
+         ic  |     -0.078      0.037    -2.08   0.038       -0.151      -0.004
+        irl  |     -0.034      0.039    -0.87   0.383       -0.111       0.043
+------------------------------------------------------------------------------
+Note: dy/dx for factor levels is the discrete change from the base level.
+(sum of wgt is 2,008.1219889845)
+
+Linear regression                               Number of obs     =      2,009
+                                                F(5, 2003)        =       2.07
+                                                Prob > F          =     0.0660
+                                                R-squared         =     0.0090
+                                                Root MSE          =     .49565
+
+----------------------------------------------------------------------------------
+                 |               Robust
+             spk |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-----------------+----------------------------------------------------------------
+           treat |
+             ic  |     -0.011      0.082    -0.14   0.891       -0.171       0.149
+            irl  |      0.006      0.089     0.07   0.943       -0.168       0.181
+                 |
+        partyid7 |     -0.009      0.012    -0.71   0.479       -0.033       0.016
+                 |
+treat#c.partyid7 |
+             ic  |     -0.016      0.018    -0.89   0.373       -0.052       0.020
+            irl  |     -0.010      0.020    -0.50   0.619       -0.049       0.029
+                 |
+           _cons |      0.515      0.054     9.61   0.000        0.410       0.620
+----------------------------------------------------------------------------------
+
+Average marginal effects                        Number of obs     =      2,009
+Model VCE    : Robust
+
+Expression   : Linear prediction, predict()
+dy/dx w.r.t. : 2.treat 3.treat partyid7
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       treat |
+         ic  |     -0.074      0.037    -1.98   0.047       -0.147      -0.001
+        irl  |     -0.032      0.039    -0.81   0.418       -0.109       0.045
+             |
+    partyid7 |     -0.017      0.008    -2.18   0.029       -0.033      -0.002
+------------------------------------------------------------------------------
+Note: dy/dx for factor levels is the discrete change from the base level.
+(sum of wgt is 2,011.2303007225)
+
+Linear regression                               Number of obs     =      2,012
+                                                F(2, 2009)        =       1.73
+                                                Prob > F          =     0.1784
+                                                R-squared         =     0.0035
+                                                Root MSE          =     .43245
+
+------------------------------------------------------------------------------
+             |               Robust
+         col |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       treat |
+         ic  |     -0.054      0.033    -1.63   0.104       -0.120       0.011
+        irl  |     -0.053      0.033    -1.62   0.106       -0.117       0.011
+             |
+       _cons |      0.284      0.024    11.83   0.000        0.237       0.331
+------------------------------------------------------------------------------
+
+Conditional marginal effects                    Number of obs     =      2,012
+Model VCE    : Robust
+
+Expression   : Linear prediction, predict()
+dy/dx w.r.t. : 2.treat 3.treat
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       treat |
+         ic  |     -0.054      0.033    -1.63   0.104       -0.120       0.011
+        irl  |     -0.053      0.033    -1.62   0.106       -0.117       0.011
+------------------------------------------------------------------------------
+Note: dy/dx for factor levels is the discrete change from the base level.
+(sum of wgt is 2,003.3937954824)
+
+Linear regression                               Number of obs     =      2,005
+                                                F(5, 1999)        =       3.96
+                                                Prob > F          =     0.0014
+                                                R-squared         =     0.0179
+                                                Root MSE          =      .4287
+
+----------------------------------------------------------------------------------
+                 |               Robust
+             col |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-----------------+----------------------------------------------------------------
+           treat |
+             ic  |     -0.115      0.073    -1.57   0.117       -0.258       0.029
+            irl  |     -0.155      0.072    -2.15   0.031       -0.296      -0.014
+                 |
+        partyid7 |     -0.038      0.011    -3.53   0.000       -0.059      -0.017
+                 |
+treat#c.partyid7 |
+             ic  |      0.017      0.015     1.10   0.274       -0.013       0.047
+            irl  |      0.028      0.016     1.75   0.080       -0.003       0.059
+                 |
+           _cons |      0.426      0.051     8.39   0.000        0.327       0.526
+----------------------------------------------------------------------------------
+
+Average marginal effects                        Number of obs     =      2,005
+Model VCE    : Robust
+
+Expression   : Linear prediction, predict()
+dy/dx w.r.t. : 2.treat 3.treat partyid7
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       treat |
+         ic  |     -0.051      0.033    -1.54   0.124       -0.116       0.014
+        irl  |     -0.049      0.033    -1.49   0.136       -0.112       0.015
+             |
+    partyid7 |     -0.024      0.006    -3.77   0.000       -0.036      -0.012
+------------------------------------------------------------------------------
+Note: dy/dx for factor levels is the discrete change from the base level.
+(sum of wgt is 2,011.1671752376)
+
+Linear regression                               Number of obs     =      2,009
+                                                F(2, 2006)        =       2.00
+                                                Prob > F          =     0.1352
+                                                R-squared         =     0.0041
+                                                Root MSE          =     .49869
+
+------------------------------------------------------------------------------
+             |               Robust
+         lib |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       treat |
+         ic  |     -0.038      0.038    -1.01   0.315       -0.112       0.036
+        irl  |      0.042      0.039     1.08   0.280       -0.035       0.119
+             |
+       _cons |      0.525      0.026    20.14   0.000        0.474       0.576
+------------------------------------------------------------------------------
+
+Conditional marginal effects                    Number of obs     =      2,009
+Model VCE    : Robust
+
+Expression   : Linear prediction, predict()
+dy/dx w.r.t. : 2.treat 3.treat
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       treat |
+         ic  |     -0.038      0.038    -1.01   0.315       -0.112       0.036
+        irl  |      0.042      0.039     1.08   0.280       -0.035       0.119
+------------------------------------------------------------------------------
+Note: dy/dx for factor levels is the discrete change from the base level.
+(sum of wgt is 2,003.3306699975)
+
+Linear regression                               Number of obs     =      2,002
+                                                F(5, 1996)        =       6.42
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.0265
+                                                Root MSE          =     .49338
+
+----------------------------------------------------------------------------------
+                 |               Robust
+             lib |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-----------------+----------------------------------------------------------------
+           treat |
+             ic  |     -0.081      0.084    -0.97   0.334       -0.245       0.083
+            irl  |      0.155      0.077     2.01   0.044        0.004       0.306
+                 |
+        partyid7 |     -0.028      0.013    -2.20   0.028       -0.053      -0.003
+                 |
+treat#c.partyid7 |
+             ic  |      0.011      0.019     0.56   0.575       -0.027       0.048
+            irl  |     -0.030      0.018    -1.66   0.098       -0.065       0.005
+                 |
+           _cons |      0.634      0.054    11.70   0.000        0.527       0.740
+----------------------------------------------------------------------------------
+
+Average marginal effects                        Number of obs     =      2,002
+Model VCE    : Robust
+
+Expression   : Linear prediction, predict()
+dy/dx w.r.t. : 2.treat 3.treat partyid7
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       treat |
+         ic  |     -0.040      0.038    -1.04   0.296       -0.114       0.035
+        irl  |      0.040      0.038     1.07   0.285       -0.034       0.114
+             |
+    partyid7 |     -0.034      0.008    -4.36   0.000       -0.049      -0.018
+------------------------------------------------------------------------------
+Note: dy/dx for factor levels is the discrete change from the base level.
+
+. 
+. estimates dir
+
+-------------------------------------------------------
+        name | command      depvar       npar  title 
+-------------+-----------------------------------------
+      spk_r1 | regress      spk             4  
+     spk_rm1 | margins      no depvar       3  
+      spk_r3 | regress      spk             8  
+     spk_rm3 | margins      no depvar       4  
+      col_r1 | regress      col             4  
+     col_rm1 | margins      no depvar       3  
+      col_r3 | regress      col             8  
+     col_rm3 | margins      no depvar       4  
+      lib_r1 | regress      lib             4  
+     lib_rm1 | margins      no depvar       3  
+      lib_r3 | regress      lib             8  
+     lib_rm3 | margins      no depvar       4  
+-------------------------------------------------------
+
+. 
+. 
+. outreg2 [*] ///
+>   using docs/tmp.xls, ///
+>   excel replace
+__000001_wvar not found
+r(111);
+
+end of do-file
+
+r(111);
+
+. exit, clear
