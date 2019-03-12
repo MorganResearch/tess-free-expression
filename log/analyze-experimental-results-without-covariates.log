@@ -1,8 +1,9 @@
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  /Users/smorgan/Documents/GitHub/tess-civil-liberties/log/analyze-experimental-results.log
+       log:  /Users/smorgan/Documents/GitHub/tess-civil-liberties/log/analyze-experimental-results-without-covariates.lo
+> g
   log type:  text
- opened on:  12 Mar 2019, 12:54:03
+ opened on:  12 Mar 2019, 14:43:49
 
 . 
 . use data/tess-civ-lib.dta
@@ -70,8 +71,6 @@ identifica |   7-level political party identification)
      Total |       953        338        721          7 |     2,019 
 
 . 
-. 
-. 
 . ********************************************************************************
 . *** Summary of outcomes
 . ********************************************************************************
@@ -97,7 +96,7 @@ identifica |   7-level political party identification)
 
 . bys treat: corr `domain' [aweight = weight]
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 -> treat = mc
 (sum of wgt is 721.2025177945)
 (obs=700)
@@ -109,7 +108,7 @@ identifica |   7-level political party identification)
          lib |   0.3924   0.2744   1.0000
 
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 -> treat = ic
 (sum of wgt is 665.2614538197)
 (obs=656)
@@ -121,7 +120,7 @@ identifica |   7-level political party identification)
          lib |   0.4005   0.2773   1.0000
 
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 -> treat = irl
 (sum of wgt is 619.7713991875)
 (obs=649)
@@ -136,7 +135,7 @@ identifica |   7-level political party identification)
 
 . bys partyid3: corr `domain' [aweight = weight]
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 -> partyid3 = 1
 (sum of wgt is 673.5352909395)
 (obs=730)
@@ -148,7 +147,7 @@ identifica |   7-level political party identification)
          lib |   0.4276   0.2980   1.0000
 
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 -> partyid3 = 2
 (sum of wgt is 773.0350914344)
 (obs=739)
@@ -160,7 +159,7 @@ identifica |   7-level political party identification)
          lib |   0.3634   0.2834   1.0000
 
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 -> partyid3 = 3
 (sum of wgt is 551.8284831877)
 (obs=529)
@@ -172,7 +171,7 @@ identifica |   7-level political party identification)
          lib |   0.4484   0.2201   1.0000
 
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 -> partyid3 = .
 (sum of wgt is 7.8365052401)
 (obs=7)
@@ -707,82 +706,77 @@ treat#partyid3l |
         name | command      depvar       npar  title 
 -------------+-----------------------------------------
       spk_r1 | regress      spk             4  
+    spk_r1d1 | margins      no depvar      25  
+    spk_r1d2 | margins      no depvar      25  
       spk_r2 | regress      spk             5  
+    spk_r2d1 | margins      no depvar      26  
+    spk_r2d2 | margins      no depvar      26  
       spk_r3 | regress      spk             8  
+    spk_r3d1 | margins      no depvar      26  
+    spk_r3d2 | margins      no depvar      26  
       spk_r4 | regress      spk             7  
+    spk_r4d1 | margins      no depvar      28  
+    spk_r4d2 | margins      no depvar      28  
       spk_r5 | regress      spk            16  
+    spk_r5d1 | margins      no depvar      28  
+    spk_r5d2 | margins      no depvar      28  
       spk_r6 | regress      spk             7  
+    spk_r6d1 | margins      no depvar      28  
+    spk_r6d2 | margins      no depvar      28  
       spk_r7 | regress      spk            16  
+    spk_r7d1 | margins      no depvar      28  
+    spk_r7d2 | margins      no depvar      28  
       col_r1 | regress      col             4  
+    col_r1d1 | margins      no depvar      25  
+    col_r1d2 | margins      no depvar      25  
       col_r2 | regress      col             5  
+    col_r2d1 | margins      no depvar      26  
+    col_r2d2 | margins      no depvar      26  
       col_r3 | regress      col             8  
+    col_r3d1 | margins      no depvar      26  
+    col_r3d2 | margins      no depvar      26  
       col_r4 | regress      col             7  
+    col_r4d1 | margins      no depvar      28  
+    col_r4d2 | margins      no depvar      28  
       col_r5 | regress      col            16  
+    col_r5d1 | margins      no depvar      28  
+    col_r5d2 | margins      no depvar      28  
       col_r6 | regress      col             7  
+    col_r6d1 | margins      no depvar      28  
+    col_r6d2 | margins      no depvar      28  
       col_r7 | regress      col            16  
+    col_r7d1 | margins      no depvar      28  
+    col_r7d2 | margins      no depvar      28  
       lib_r1 | regress      lib             4  
+    lib_r1d1 | margins      no depvar      25  
+    lib_r1d2 | margins      no depvar      25  
       lib_r2 | regress      lib             5  
+    lib_r2d1 | margins      no depvar      26  
+    lib_r2d2 | margins      no depvar      26  
       lib_r3 | regress      lib             8  
+    lib_r3d1 | margins      no depvar      26  
+    lib_r3d2 | margins      no depvar      26  
       lib_r4 | regress      lib             7  
+    lib_r4d1 | margins      no depvar      28  
+    lib_r4d2 | margins      no depvar      28  
       lib_r5 | regress      lib            16  
+    lib_r5d1 | margins      no depvar      28  
+    lib_r5d2 | margins      no depvar      28  
       lib_r6 | regress      lib             7  
+    lib_r6d1 | margins      no depvar      28  
+    lib_r6d2 | margins      no depvar      28  
       lib_r7 | regress      lib            16  
-     spk_rd1 | margins      no depvar       3  
-     spk_rd2 | margins      no depvar       4  
-     col_rd1 | margins      no depvar       3  
-     col_rd2 | margins      no depvar       4  
-     lib_rd1 | margins      no depvar       3  
-     lib_rd2 | margins      no depvar       4  
-    spk_r1d1 | margins      no depvar       3  
-    spk_r1d2 | margins      no depvar       3  
-    spk_r2d1 | margins      no depvar       4  
-    spk_r2d2 | margins      no depvar       4  
-    col_r1d1 | margins      no depvar       3  
-    col_r1d2 | margins      no depvar       3  
-    col_r2d1 | margins      no depvar       4  
-    col_r2d2 | margins      no depvar       4  
-    lib_r1d1 | margins      no depvar       3  
-    lib_r1d2 | margins      no depvar       3  
-    lib_r2d1 | margins      no depvar       4  
-    lib_r2d2 | margins      no depvar       4  
-    spk_r3d1 | margins      no depvar       4  
-    spk_r3d2 | margins      no depvar       4  
-    spk_r4d1 | margins      no depvar       6  
-    spk_r4d2 | margins      no depvar       6  
-    spk_r5d1 | margins      no depvar       6  
-    spk_r5d2 | margins      no depvar       6  
-    spk_r6d1 | margins      no depvar       6  
-    spk_r6d2 | margins      no depvar       6  
-    spk_r7d1 | margins      no depvar       6  
-    spk_r7d2 | margins      no depvar       6  
-    col_r3d1 | margins      no depvar       4  
-    col_r3d2 | margins      no depvar       4  
-    col_r4d1 | margins      no depvar       6  
-    col_r4d2 | margins      no depvar       6  
-    col_r5d1 | margins      no depvar       6  
-    col_r5d2 | margins      no depvar       6  
-    col_r6d1 | margins      no depvar       6  
-    col_r6d2 | margins      no depvar       6  
-    col_r7d1 | margins      no depvar       6  
-    col_r7d2 | margins      no depvar       6  
-    lib_r3d1 | margins      no depvar       4  
-    lib_r3d2 | margins      no depvar       4  
-    lib_r4d1 | margins      no depvar       6  
-    lib_r4d2 | margins      no depvar       6  
-    lib_r5d1 | margins      no depvar       6  
-    lib_r5d2 | margins      no depvar       6  
-    lib_r6d1 | margins      no depvar       6  
-    lib_r6d2 | margins      no depvar       6  
-    lib_r7d1 | margins      no depvar       6  
-    lib_r7d2 | margins      no depvar       6  
+    lib_r7d1 | margins      no depvar      28  
+    lib_r7d2 | margins      no depvar      28  
 -------------------------------------------------------
 
 . 
 . outreg2 [*] ///
->   using docs/ols-estimates.xls, ///
->   noaster stats(coef se ci) dec(3) ///
+>   using docs/ols-estimates-without-covariates.xls, ///
+>   noaster stats(coef se ci pval)  dec(3)  ///
+>   paren(se) bracket(ci) ///
 >   excel replace
-docs/ols-estimates.xls
+docs/ols-estimates-without-covariates.xls
 dir : seeout
 
 .   
@@ -2581,13 +2575,25 @@ Note: dy/dx for factor levels is the discrete change from the base level.
 
 . 
 . outreg2 [*] ///
->   using docs/ols-margins.xls, ///
->   noaster stats(coef se ci) dec(3) ///
+>   using docs/ols-margins-without-covariates.xls, ///
+>   noaster stats(coef se ci pval) bdec(1) sdec(1) cdec(3)  ///
+>   stnum(replace coef=coef*100, replace se=se*100) ///
+>   paren(se) bracket(ci) ///
 >   excel replace
-docs/ols-margins.xls
+docs/ols-margins-without-covariates.xls
 dir : seeout
 
-.   
+.  
+. outreg2 [*] ///
+>   using docs/ols-margins-without-covariates-wide.xls, ///
+>   noaster stats(coef se ci pval) bdec(1) sdec(1) cdec(3)  ///
+>   stnum(replace coef=coef*100, replace se=se*100) ///
+>   paren(se) bracket(ci) ///
+>   sideway excel replace
+docs/ols-margins-without-covariates-wide.xls
+dir : seeout
+
+. 
 . estimates clear
 
 . 
@@ -3196,11 +3202,14 @@ treat#partyid3l |
 
 . 
 . outreg2 [*] ///
->   using docs/logit-estimates.xls, ///
+>   using docs/logit-estimates-without-covariates.xls, ///
+>   noaster stats(coef se ci pval)  dec(3)  ///
+>   paren(se) bracket(ci) ///
 >   excel replace
-docs/logit-estimates.xls
+docs/logit-estimates-without-covariates.xls
 dir : seeout
 
+. 
 . estimates clear
 
 . 
@@ -5060,21 +5069,29 @@ Note: dy/dx for factor levels is the discrete change from the base level.
 
 . 
 . outreg2 [*] ///
->   using docs/logit-estimates-margins.xls, ///
+>   using docs/logit-margins-without-covariates.xls, ///
+>   noaster stats(coef se ci pval) bdec(1) sdec(1) cdec(3)  ///
+>   stnum(replace coef=coef*100, replace se=se*100) ///
+>   paren(se) bracket(ci) ///
 >   excel replace
-docs/logit-estimates-margins.xls
+docs/logit-margins-without-covariates.xls
 dir : seeout
 
-. estimates clear
+. 
+. outreg2 [*] ///
+>   using docs/logit-margins-without-covariates-wide.xls, ///
+>   noaster stats(coef se ci pval) bdec(1) sdec(1) cdec(3)  ///
+>   stnum(replace coef=coef*100, replace se=se*100) ///
+>   paren(se) bracket(ci) ///
+>   sideway excel replace
+docs/logit-margins-without-covariates-wide.xls
+dir : seeout
 
-. 
-. 
-. 
-. 
 . 
 . log close
       name:  <unnamed>
-       log:  /Users/smorgan/Documents/GitHub/tess-civil-liberties/log/analyze-experimental-results.log
+       log:  /Users/smorgan/Documents/GitHub/tess-civil-liberties/log/analyze-experimental-results-without-covariates.lo
+> g
   log type:  text
- closed on:  12 Mar 2019, 12:54:39
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ closed on:  12 Mar 2019, 14:45:22
+------------------------------------------------------------------------------------------------------------------------
