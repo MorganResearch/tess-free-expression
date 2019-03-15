@@ -50,18 +50,6 @@ estimates store `dom'_r2
 regress `dom' b1.treat##c.partyid7 [pweight=weight]
 estimates store `dom'_r3
 
-regress `dom' b1.treat b2.partyid3 [pweight=weight]
-estimates store `dom'_r4
-
-regress `dom' b1.treat##b2.partyid3 [pweight=weight]
-estimates store `dom'_r5
-
-regress `dom' b1.treat b2.partyid3l [pweight=weight]
-estimates store `dom'_r6
-
-regress `dom' b1.treat##b2.partyid3l [pweight=weight]
-estimates store `dom'_r7
-
 }
 
 estimates dir
@@ -106,46 +94,6 @@ regress `dom' b1.treat##c.partyid7 [pweight=weight]
     margins, dydx(*) post
     estimates store `dom'_r3d2
 
-regress `dom' b1.treat b2.partyid3 [pweight=weight]
-  margins b1.treat b2.partyid3, post
-  estimates store `dom'_r4
-    quietly regress `dom' b1.treat b2.partyid3 [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r4d1
-	quietly regress `dom' b2.treat b2.partyid3 [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r4d2
-
-regress `dom' b1.treat##b2.partyid3 [pweight=weight]
-  margins b1.treat##b2.partyid3, post
-  estimates store `dom'_r5
-    quietly regress `dom' b1.treat##b2.partyid3 [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r5d1
-	quietly regress `dom' b2.treat##b2.partyid3 [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r5d2
-
-regress `dom' b1.treat b2.partyid3l [pweight=weight]
-  margins b1.treat b2.partyid3l, post
-  estimates store `dom'_r6
-    quietly regress `dom' b1.treat b2.partyid3l [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r6d1
-	quietly regress `dom' b2.treat b2.partyid3l [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r6d2
-
-regress `dom' b1.treat##b2.partyid3l [pweight=weight]
-  margins b1.treat##b2.partyid3l, post
-  estimates store `dom'_r7
-    quietly regress `dom' b1.treat##b2.partyid3l [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r7d1
-	quietly regress `dom' b2.treat##b2.partyid3l [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r7d2
-
 }
 
 outreg2 [*] ///
@@ -176,18 +124,6 @@ estimates store `dom'_r2
 
 logit `dom' b1.treat##c.partyid7 [pweight=weight]
 estimates store `dom'_r3
-
-logit `dom' b1.treat b2.partyid3 [pweight=weight]
-estimates store `dom'_r4
-
-logit `dom' b1.treat##b2.partyid3 [pweight=weight]
-estimates store `dom'_r5
-
-logit `dom' b1.treat b2.partyid3l [pweight=weight]
-estimates store `dom'_r6
-
-logit `dom' b1.treat##b2.partyid3l [pweight=weight]
-estimates store `dom'_r7
 
 }
 
@@ -232,46 +168,6 @@ logit `dom' b1.treat##c.partyid7 [pweight=weight]
 	quietly logit `dom' b2.treat##c.partyid7 [pweight=weight]
     margins, dydx(*) post
     estimates store `dom'_r3d2
-
-logit `dom' b1.treat b2.partyid3 [pweight=weight]
-  margins b1.treat b2.partyid3, post
-  estimates store `dom'_r4
-    quietly logit `dom' b1.treat b2.partyid3 [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r4d1
-	quietly logit `dom' b2.treat b2.partyid3 [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r4d2
-
-logit `dom' b1.treat##b2.partyid3 [pweight=weight]
-  margins b1.treat##b2.partyid3, post
-  estimates store `dom'_r5
-    quietly logit `dom' b1.treat##b2.partyid3 [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r5d1
-	quietly logit `dom' b2.treat##b2.partyid3 [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r5d2
-
-logit `dom' b1.treat b2.partyid3l [pweight=weight]
-  margins b1.treat b2.partyid3l, post
-  estimates store `dom'_r6
-    quietly logit `dom' b1.treat b2.partyid3l [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r6d1
-	quietly logit `dom' b2.treat b2.partyid3l [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r6d2
-
-logit `dom' b1.treat##b2.partyid3l [pweight=weight]
-  margins b1.treat##b2.partyid3l, post
-  estimates store `dom'_r7
-    quietly logit `dom' b1.treat##b2.partyid3l [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r7d1
-	quietly logit `dom' b2.treat##b2.partyid3l [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r7d2
 
 }
 
