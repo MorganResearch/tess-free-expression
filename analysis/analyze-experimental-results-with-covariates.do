@@ -58,7 +58,7 @@ foreach dom in `domain' {
 regress `dom' `covariates' b1.treat [pweight=weight]
 estimates store `dom'_r1
 
-regress `dom' `covariates' b1.treat c.partyid7 [pweight=weight]
+regress `dom' `covariates' c.partyid7 [pweight=weight]
 estimates store `dom'_r2
 
 regress `dom' `covariates' b1.treat##c.partyid7 [pweight=weight]
@@ -82,31 +82,34 @@ regress `dom' `covariates' b1.treat [pweight=weight]
   margins b1.treat, post
   estimates store `dom'_r1
     quietly regress `dom' `covariates' b1.treat [pweight=weight]
-    margins, dydx(*) post
+    margins, dydx(b1.treat) post
     estimates store `dom'_r1d1
     quietly regress `dom' `covariates' b2.treat [pweight=weight]
-    margins, dydx(*) post
+    margins, dydx(b2.treat) post
     estimates store `dom'_r1d2
 
-regress `dom' `covariates' b1.treat c.partyid7 [pweight=weight]
-  margins b1.treat, post
+regress `dom' `covariates' c.partyid7 [pweight=weight]
+  margins, dydx(c.partyid7) post
   estimates store `dom'_r2
-    quietly regress `dom' `covariates' b1.treat c.partyid7 [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r2d1
-	quietly regress `dom' `covariates' b2.treat c.partyid7 [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r2d2
-
+   
 regress `dom' `covariates' b1.treat##c.partyid7 [pweight=weight]
   margins b1.treat, post
   estimates store `dom'_r3
     quietly regress `dom' `covariates' b1.treat##c.partyid7 [pweight=weight]
-    margins, dydx(*) post
+    margins, dydx(b1.treat) post
     estimates store `dom'_r3d1
-	quietly regress `dom' `covariates' b2.treat##c.partyid7 [pweight=weight]
-    margins, dydx(*) post
+    quietly regress `dom' `covariates' b2.treat##c.partyid7 [pweight=weight]
+    margins, dydx(b2.treat) post
     estimates store `dom'_r3d2
+  quietly regress `dom' `covariates' b1.treat##c.partyid7 [pweight=weight]
+    margins, dydx(c.partyid7) post
+    estimates store `dom'_r4
+  quietly regress `dom' `covariates' b1.treat##c.partyid7 [pweight=weight]
+    margins, dydx(partyid7) at(treat = (1(1)3)) post
+    estimates store `dom'_r5
+  quietly regress `dom' `covariates' b1.treat##c.partyid7 [pweight=weight] 
+    margins, dydx(b1.treat) at(partyid = (1(1)7)) post
+    estimates store `dom'_r6
 
 }
 
@@ -117,13 +120,6 @@ outreg2 [*] ///
   paren(se) bracket(ci) ///
   excel replace
 
-outreg2 [*] ///
-  using docs/ols-margins-with-covariates-wide.xls, ///
-  noaster stats(coef se ci pval) bdec(1) sdec(1) cdec(3)  ///
-  stnum(replace coef=coef*100, replace se=se*100) ///
-  paren(se) bracket(ci) ///
-  sideway excel replace
-
 estimates clear
 
 *** Logit models, with no additional adjustment
@@ -133,7 +129,7 @@ foreach dom in `domain' {
 logit `dom' `covariates' b1.treat [pweight=weight]
 estimates store `dom'_r1
 
-logit `dom' `covariates' b1.treat c.partyid7 [pweight=weight]
+logit `dom' `covariates' c.partyid7 [pweight=weight]
 estimates store `dom'_r2
 
 logit `dom' `covariates' b1.treat##c.partyid7 [pweight=weight]
@@ -157,32 +153,35 @@ logit `dom' `covariates' b1.treat [pweight=weight]
   margins b1.treat, post
   estimates store `dom'_r1
     quietly logit `dom' `covariates' b1.treat [pweight=weight]
-    margins, dydx(*) post
+    margins, dydx(b1.treat) post
     estimates store `dom'_r1d1
     quietly logit `dom' `covariates' b2.treat [pweight=weight]
-    margins, dydx(*) post
+    margins, dydx(b2.treat) post
     estimates store `dom'_r1d2
 
-logit `dom' `covariates' b1.treat c.partyid7 [pweight=weight]
-  margins b1.treat, post
+logit `dom' `covariates' c.partyid7 [pweight=weight]
+  margins, dydx(c.partyid7) post
   estimates store `dom'_r2
-    quietly logit `dom' `covariates' b1.treat c.partyid7 [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r2d1
-	quietly logit `dom' `covariates' b2.treat c.partyid7 [pweight=weight]
-    margins, dydx(*) post
-    estimates store `dom'_r2d2
-
+   
 logit `dom' `covariates' b1.treat##c.partyid7 [pweight=weight]
   margins b1.treat, post
   estimates store `dom'_r3
     quietly logit `dom' `covariates' b1.treat##c.partyid7 [pweight=weight]
-    margins, dydx(*) post
+    margins, dydx(b1.treat) post
     estimates store `dom'_r3d1
-	quietly logit `dom' `covariates' b2.treat##c.partyid7 [pweight=weight]
-    margins, dydx(*) post
+    quietly logit `dom' `covariates' b2.treat##c.partyid7 [pweight=weight]
+    margins, dydx(b2.treat) post
     estimates store `dom'_r3d2
-
+  quietly logit `dom' `covariates' b1.treat##c.partyid7 [pweight=weight]
+    margins, dydx(c.partyid7) post
+    estimates store `dom'_r4
+  quietly logit `dom' `covariates' b1.treat##c.partyid7 [pweight=weight]
+    margins, dydx(partyid7) at(treat = (1(1)3)) post
+    estimates store `dom'_r5
+  quietly logit `dom' `covariates' b1.treat##c.partyid7 [pweight=weight] 
+    margins, dydx(b1.treat) at(partyid = (1(1)7)) post
+    estimates store `dom'_r6
+	
 }
 
 outreg2 [*] ///
@@ -192,12 +191,6 @@ outreg2 [*] ///
   paren(se) bracket(ci) ///
   excel replace
 
-outreg2 [*] ///
-  using docs/logit-margins-with-covariates-wide.xls, ///
-  noaster stats(coef se ci pval) bdec(1) sdec(1) cdec(3)  ///
-  stnum(replace coef=coef*100, replace se=se*100) ///
-  paren(se) bracket(ci) ///
-  sideway excel replace
 
 estimates clear
 

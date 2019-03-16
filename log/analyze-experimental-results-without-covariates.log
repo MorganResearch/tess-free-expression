@@ -1,9 +1,9 @@
-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  /Users/smorgan/Documents/GitHub/tess-civil-liberties/log/analyze-experimental-results-without-covariates.lo
-> g
+       log:  /Users/stephenmorgan/GitHub/tess-civil-liberties/log/analyze-experimental-results-without-covariates.l
+> og
   log type:  text
- opened on:  15 Mar 2019, 14:46:04
+ opened on:  16 Mar 2019, 14:45:46
 
 . 
 . use data/tess-civ-lib.dta
@@ -96,7 +96,7 @@ identifica |   7-level political party identification)
 
 . bys treat: corr `domain' [aweight = weight]
 
-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
 -> treat = mc
 (sum of wgt is 721.2025177945)
 (obs=700)
@@ -108,7 +108,7 @@ identifica |   7-level political party identification)
          lib |   0.3924   0.2744   1.0000
 
 
-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
 -> treat = ic
 (sum of wgt is 665.2614538197)
 (obs=656)
@@ -120,7 +120,7 @@ identifica |   7-level political party identification)
          lib |   0.4005   0.2773   1.0000
 
 
-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
 -> treat = irl
 (sum of wgt is 619.7713991875)
 (obs=649)
@@ -135,7 +135,7 @@ identifica |   7-level political party identification)
 
 . bys partyid3: corr `domain' [aweight = weight]
 
-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
 -> partyid3 = 1
 (sum of wgt is 673.5352909395)
 (obs=730)
@@ -147,7 +147,7 @@ identifica |   7-level political party identification)
          lib |   0.4276   0.2980   1.0000
 
 
-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
 -> partyid3 = 2
 (sum of wgt is 773.0350914344)
 (obs=739)
@@ -159,7 +159,7 @@ identifica |   7-level political party identification)
          lib |   0.3634   0.2834   1.0000
 
 
-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
 -> partyid3 = 3
 (sum of wgt is 551.8284831877)
 (obs=529)
@@ -171,7 +171,7 @@ identifica |   7-level political party identification)
          lib |   0.4484   0.2201   1.0000
 
 
-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
 -> partyid3 = .
 (sum of wgt is 7.8365052401)
 (obs=7)
@@ -196,7 +196,7 @@ identifica |   7-level political party identification)
 . regress `dom' b1.treat [pweight=weight]
   3. estimates store `dom'_r1
   4. 
-. regress `dom' b1.treat c.partyid7 [pweight=weight]
+. regress `dom' c.partyid7 [pweight=weight]
   5. estimates store `dom'_r2
   6. 
 . regress `dom' b1.treat##c.partyid7 [pweight=weight]
@@ -224,21 +224,17 @@ Linear regression                               Number of obs     =      2,016
 (sum of wgt is 2,008.1219889845)
 
 Linear regression                               Number of obs     =      2,009
-                                                F(3, 2005)        =       2.98
-                                                Prob > F          =     0.0302
-                                                R-squared         =     0.0083
-                                                Root MSE          =     .49558
+                                                F(1, 2007)        =       4.53
+                                                Prob > F          =     0.0335
+                                                R-squared         =     0.0044
+                                                Root MSE          =      .4963
 
 ------------------------------------------------------------------------------
              |               Robust
          spk |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-       treat |
-         ic  |     -0.074      0.037    -1.99   0.046       -0.148      -0.001
-        irl  |     -0.031      0.039    -0.80   0.423       -0.108       0.046
-             |
-    partyid7 |     -0.017      0.008    -2.09   0.036       -0.032      -0.001
-       _cons |      0.545      0.040    13.68   0.000        0.467       0.624
+    partyid7 |     -0.017      0.008    -2.13   0.033       -0.033      -0.001
+       _cons |      0.512      0.036    14.33   0.000        0.442       0.582
 ------------------------------------------------------------------------------
 (sum of wgt is 2,008.1219889845)
 
@@ -285,21 +281,17 @@ Linear regression                               Number of obs     =      2,012
 (sum of wgt is 2,003.3937954824)
 
 Linear regression                               Number of obs     =      2,005
-                                                F(3, 2001)        =       5.66
-                                                Prob > F          =     0.0007
-                                                R-squared         =     0.0151
-                                                Root MSE          =     .42909
+                                                F(1, 2003)        =      13.89
+                                                Prob > F          =     0.0002
+                                                R-squared         =     0.0120
+                                                Root MSE          =     .42955
 
 ------------------------------------------------------------------------------
              |               Robust
          col |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-       treat |
-         ic  |     -0.051      0.033    -1.54   0.123       -0.116       0.014
-        irl  |     -0.049      0.033    -1.50   0.134       -0.114       0.015
-             |
-    partyid7 |     -0.024      0.006    -3.74   0.000       -0.037      -0.012
-       _cons |      0.374      0.036    10.35   0.000        0.303       0.444
+    partyid7 |     -0.024      0.007    -3.73   0.000       -0.037      -0.012
+       _cons |      0.342      0.031    11.16   0.000        0.282       0.402
 ------------------------------------------------------------------------------
 (sum of wgt is 2,003.3937954824)
 
@@ -346,21 +338,17 @@ Linear regression                               Number of obs     =      2,009
 (sum of wgt is 2,003.3306699975)
 
 Linear regression                               Number of obs     =      2,002
-                                                F(3, 1998)        =       8.18
+                                                F(1, 2000)        =      19.51
                                                 Prob > F          =     0.0000
-                                                R-squared         =     0.0223
-                                                Root MSE          =     .49419
+                                                R-squared         =     0.0182
+                                                Root MSE          =     .49497
 
 ------------------------------------------------------------------------------
              |               Robust
          lib |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-       treat |
-         ic  |     -0.038      0.038    -1.01   0.314       -0.113       0.036
-        irl  |      0.041      0.038     1.09   0.278       -0.033       0.116
-             |
-    partyid7 |     -0.034      0.008    -4.41   0.000       -0.050      -0.019
-       _cons |      0.659      0.039    16.79   0.000        0.582       0.736
+    partyid7 |     -0.035      0.008    -4.42   0.000       -0.050      -0.019
+       _cons |      0.660      0.035    19.10   0.000        0.593       0.728
 ------------------------------------------------------------------------------
 (sum of wgt is 2,003.3306699975)
 
@@ -394,14 +382,35 @@ treat#c.partyid7 |
         name | command      depvar       npar  title 
 -------------+-----------------------------------------
       spk_r1 | regress      spk             4  
-      spk_r2 | regress      spk             5  
+    spk_r1d1 | margins      no depvar       3  
+    spk_r1d2 | margins      no depvar       3  
+      spk_r2 | regress      spk             2  
       spk_r3 | regress      spk             8  
+    spk_r3d1 | margins      no depvar       3  
+    spk_r3d2 | margins      no depvar       3  
+      spk_r4 | margins      no depvar       1  
+      spk_r5 | margins      no depvar       3  
+      spk_r6 | margins      no depvar      21  
       col_r1 | regress      col             4  
-      col_r2 | regress      col             5  
+    col_r1d1 | margins      no depvar       3  
+    col_r1d2 | margins      no depvar       3  
+      col_r2 | regress      col             2  
       col_r3 | regress      col             8  
+    col_r3d1 | margins      no depvar       3  
+    col_r3d2 | margins      no depvar       3  
+      col_r4 | margins      no depvar       1  
+      col_r5 | margins      no depvar       3  
+      col_r6 | margins      no depvar      21  
       lib_r1 | regress      lib             4  
-      lib_r2 | regress      lib             5  
+    lib_r1d1 | margins      no depvar       3  
+    lib_r1d2 | margins      no depvar       3  
+      lib_r2 | regress      lib             2  
       lib_r3 | regress      lib             8  
+    lib_r3d1 | margins      no depvar       3  
+    lib_r3d2 | margins      no depvar       3  
+      lib_r4 | margins      no depvar       1  
+      lib_r5 | margins      no depvar       3  
+      lib_r6 | margins      no depvar      21  
 -------------------------------------------------------
 
 . 
@@ -423,32 +432,35 @@ dir : seeout
   3.   margins b1.treat, post
   4.   estimates store `dom'_r1
   5.     quietly regress `dom' b1.treat [pweight=weight]
-  6.     margins, dydx(*) post
+  6.     margins, dydx(b1.treat) post
   7.     estimates store `dom'_r1d1
   8.     quietly regress `dom' b2.treat [pweight=weight]
-  9.     margins, dydx(*) post
+  9.     margins, dydx(b2.treat) post
  10.     estimates store `dom'_r1d2
  11. 
-. regress `dom' b1.treat c.partyid7 [pweight=weight]
- 12.   margins b1.treat, post
+. regress `dom' c.partyid7 [pweight=weight]
+ 12.   margins, dydx(c.partyid7) post
  13.   estimates store `dom'_r2
- 14.     quietly regress `dom' b1.treat c.partyid7 [pweight=weight]
- 15.     margins, dydx(*) post
- 16.     estimates store `dom'_r2d1
- 17.         quietly regress `dom' b2.treat c.partyid7 [pweight=weight]
- 18.     margins, dydx(*) post
- 19.     estimates store `dom'_r2d2
- 20. 
+ 14.    
 . regress `dom' b1.treat##c.partyid7 [pweight=weight]
- 21.   margins b1.treat, post
- 22.   estimates store `dom'_r3
- 23.     quietly regress `dom' b1.treat##c.partyid7 [pweight=weight]
- 24.     margins, dydx(*) post
- 25.     estimates store `dom'_r3d1
- 26.         quietly regress `dom' b2.treat##c.partyid7 [pweight=weight]
- 27.     margins, dydx(*) post
- 28.     estimates store `dom'_r3d2
- 29. 
+ 15.   margins b1.treat, post
+ 16.   estimates store `dom'_r3
+ 17.     quietly regress `dom' b1.treat##c.partyid7 [pweight=weight]
+ 18.     margins, dydx(b1.treat) post
+ 19.     estimates store `dom'_r3d1
+ 20.     quietly regress `dom' b2.treat##c.partyid7 [pweight=weight]
+ 21.     margins, dydx(b2.treat) post
+ 22.     estimates store `dom'_r3d2
+ 23.   quietly regress `dom' b1.treat##c.partyid7 [pweight=weight]
+ 24.     margins, dydx(c.partyid7) post
+ 25.     estimates store `dom'_r4
+ 26.   quietly regress `dom' b1.treat##c.partyid7 [pweight=weight]
+ 27.     margins, dydx(partyid7) at(treat = (1(1)3)) post
+ 28.     estimates store `dom'_r5
+ 29.   quietly regress `dom' b1.treat##c.partyid7 [pweight=weight] 
+ 30.     margins, dydx(b1.treat) at(partyid = (1(1)7)) post
+ 31.     estimates store `dom'_r6
+ 32. 
 . }
 (sum of wgt is 2,015.9584942246)
 
@@ -518,73 +530,31 @@ Note: dy/dx for factor levels is the discrete change from the base level.
 (sum of wgt is 2,008.1219889845)
 
 Linear regression                               Number of obs     =      2,009
-                                                F(3, 2005)        =       2.98
-                                                Prob > F          =     0.0302
-                                                R-squared         =     0.0083
-                                                Root MSE          =     .49558
+                                                F(1, 2007)        =       4.53
+                                                Prob > F          =     0.0335
+                                                R-squared         =     0.0044
+                                                Root MSE          =      .4963
 
 ------------------------------------------------------------------------------
              |               Robust
          spk |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-       treat |
-         ic  |     -0.074      0.037    -1.99   0.046       -0.148      -0.001
-        irl  |     -0.031      0.039    -0.80   0.423       -0.108       0.046
-             |
-    partyid7 |     -0.017      0.008    -2.09   0.036       -0.032      -0.001
-       _cons |      0.545      0.040    13.68   0.000        0.467       0.624
-------------------------------------------------------------------------------
-
-Predictive margins                              Number of obs     =      2,009
-Model VCE    : Robust
-
-Expression   : Linear prediction, predict()
-
-------------------------------------------------------------------------------
-             |            Delta-method
-             |     Margin   Std. Err.      t    P>|t|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-       treat |
-         mc  |      0.481      0.026    18.43   0.000        0.430       0.532
-         ic  |      0.407      0.027    15.23   0.000        0.354       0.459
-        irl  |      0.450      0.029    15.33   0.000        0.392       0.507
+    partyid7 |     -0.017      0.008    -2.13   0.033       -0.033      -0.001
+       _cons |      0.512      0.036    14.33   0.000        0.442       0.582
 ------------------------------------------------------------------------------
 
 Average marginal effects                        Number of obs     =      2,009
 Model VCE    : Robust
 
 Expression   : Linear prediction, predict()
-dy/dx w.r.t. : 2.treat 3.treat partyid7
+dy/dx w.r.t. : partyid7
 
 ------------------------------------------------------------------------------
              |            Delta-method
              |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-       treat |
-         ic  |     -0.074      0.037    -1.99   0.046       -0.148      -0.001
-        irl  |     -0.031      0.039    -0.80   0.423       -0.108       0.046
-             |
-    partyid7 |     -0.017      0.008    -2.09   0.036       -0.032      -0.001
+    partyid7 |     -0.017      0.008    -2.13   0.033       -0.033      -0.001
 ------------------------------------------------------------------------------
-Note: dy/dx for factor levels is the discrete change from the base level.
-
-Average marginal effects                        Number of obs     =      2,009
-Model VCE    : Robust
-
-Expression   : Linear prediction, predict()
-dy/dx w.r.t. : 1.treat 3.treat partyid7
-
-------------------------------------------------------------------------------
-             |            Delta-method
-             |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-       treat |
-         mc  |      0.074      0.037     1.99   0.046        0.001       0.148
-        irl  |      0.043      0.040     1.08   0.279       -0.035       0.121
-             |
-    partyid7 |     -0.017      0.008    -2.09   0.036       -0.032      -0.001
-------------------------------------------------------------------------------
-Note: dy/dx for factor levels is the discrete change from the base level.
 (sum of wgt is 2,008.1219889845)
 
 Linear regression                               Number of obs     =      2,009
@@ -629,7 +599,7 @@ Average marginal effects                        Number of obs     =      2,009
 Model VCE    : Robust
 
 Expression   : Linear prediction, predict()
-dy/dx w.r.t. : 2.treat 3.treat partyid7
+dy/dx w.r.t. : 2.treat 3.treat
 
 ------------------------------------------------------------------------------
              |            Delta-method
@@ -638,8 +608,6 @@ dy/dx w.r.t. : 2.treat 3.treat partyid7
        treat |
          ic  |     -0.074      0.037    -1.98   0.047       -0.147      -0.001
         irl  |     -0.032      0.039    -0.81   0.418       -0.109       0.045
-             |
-    partyid7 |     -0.017      0.008    -2.18   0.029       -0.033      -0.002
 ------------------------------------------------------------------------------
 Note: dy/dx for factor levels is the discrete change from the base level.
 
@@ -647,7 +615,7 @@ Average marginal effects                        Number of obs     =      2,009
 Model VCE    : Robust
 
 Expression   : Linear prediction, predict()
-dy/dx w.r.t. : 1.treat 3.treat partyid7
+dy/dx w.r.t. : 1.treat 3.treat
 
 ------------------------------------------------------------------------------
              |            Delta-method
@@ -656,8 +624,90 @@ dy/dx w.r.t. : 1.treat 3.treat partyid7
        treat |
          mc  |      0.074      0.037     1.98   0.047        0.001       0.147
         irl  |      0.042      0.040     1.07   0.286       -0.035       0.120
-             |
+------------------------------------------------------------------------------
+Note: dy/dx for factor levels is the discrete change from the base level.
+
+Average marginal effects                        Number of obs     =      2,009
+Model VCE    : Robust
+
+Expression   : Linear prediction, predict()
+dy/dx w.r.t. : partyid7
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
     partyid7 |     -0.017      0.008    -2.18   0.029       -0.033      -0.002
+------------------------------------------------------------------------------
+
+Average marginal effects                        Number of obs     =      2,009
+Model VCE    : Robust
+
+Expression   : Linear prediction, predict()
+dy/dx w.r.t. : partyid7
+
+1._at        : treat           =           1
+
+2._at        : treat           =           2
+
+3._at        : treat           =           3
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+partyid7     |
+         _at |
+          1  |     -0.009      0.012    -0.71   0.479       -0.033       0.016
+          2  |     -0.025      0.013    -1.87   0.062       -0.052       0.001
+          3  |     -0.019      0.016    -1.21   0.228       -0.049       0.012
+------------------------------------------------------------------------------
+
+Conditional marginal effects                    Number of obs     =      2,009
+Model VCE    : Robust
+
+Expression   : Linear prediction, predict()
+dy/dx w.r.t. : 2.treat 3.treat
+
+1._at        : partyid7        =           1
+
+2._at        : partyid7        =           2
+
+3._at        : partyid7        =           3
+
+4._at        : partyid7        =           4
+
+5._at        : partyid7        =           5
+
+6._at        : partyid7        =           6
+
+7._at        : partyid7        =           7
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+1.treat      |  (base outcome)
+-------------+----------------------------------------------------------------
+2.treat      |
+         _at |
+          1  |     -0.028      0.066    -0.42   0.675       -0.157       0.102
+          2  |     -0.044      0.052    -0.85   0.396       -0.146       0.058
+          3  |     -0.060      0.041    -1.46   0.143       -0.141       0.020
+          4  |     -0.077      0.037    -2.06   0.040       -0.150      -0.004
+          5  |     -0.093      0.042    -2.22   0.027       -0.175      -0.011
+          6  |     -0.110      0.053    -2.07   0.039       -0.213      -0.006
+          7  |     -0.126      0.067    -1.87   0.061       -0.258       0.006
+-------------+----------------------------------------------------------------
+3.treat      |
+         _at |
+          1  |     -0.004      0.072    -0.05   0.960       -0.144       0.137
+          2  |     -0.014      0.056    -0.24   0.809       -0.123       0.096
+          3  |     -0.023      0.044    -0.53   0.594       -0.110       0.063
+          4  |     -0.033      0.039    -0.85   0.393       -0.110       0.043
+          5  |     -0.043      0.044    -0.99   0.323       -0.129       0.043
+          6  |     -0.053      0.056    -0.95   0.340       -0.162       0.056
+          7  |     -0.063      0.071    -0.88   0.377       -0.203       0.077
 ------------------------------------------------------------------------------
 Note: dy/dx for factor levels is the discrete change from the base level.
 (sum of wgt is 2,011.2303007225)
@@ -728,73 +778,31 @@ Note: dy/dx for factor levels is the discrete change from the base level.
 (sum of wgt is 2,003.3937954824)
 
 Linear regression                               Number of obs     =      2,005
-                                                F(3, 2001)        =       5.66
-                                                Prob > F          =     0.0007
-                                                R-squared         =     0.0151
-                                                Root MSE          =     .42909
+                                                F(1, 2003)        =      13.89
+                                                Prob > F          =     0.0002
+                                                R-squared         =     0.0120
+                                                Root MSE          =     .42955
 
 ------------------------------------------------------------------------------
              |               Robust
          col |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-       treat |
-         ic  |     -0.051      0.033    -1.54   0.123       -0.116       0.014
-        irl  |     -0.049      0.033    -1.50   0.134       -0.114       0.015
-             |
-    partyid7 |     -0.024      0.006    -3.74   0.000       -0.037      -0.012
-       _cons |      0.374      0.036    10.35   0.000        0.303       0.444
-------------------------------------------------------------------------------
-
-Predictive margins                              Number of obs     =      2,005
-Model VCE    : Robust
-
-Expression   : Linear prediction, predict()
-
-------------------------------------------------------------------------------
-             |            Delta-method
-             |     Margin   Std. Err.      t    P>|t|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-       treat |
-         mc  |      0.280      0.024    11.88   0.000        0.234       0.327
-         ic  |      0.229      0.023     9.96   0.000        0.184       0.275
-        irl  |      0.231      0.023    10.08   0.000        0.186       0.276
+    partyid7 |     -0.024      0.007    -3.73   0.000       -0.037      -0.012
+       _cons |      0.342      0.031    11.16   0.000        0.282       0.402
 ------------------------------------------------------------------------------
 
 Average marginal effects                        Number of obs     =      2,005
 Model VCE    : Robust
 
 Expression   : Linear prediction, predict()
-dy/dx w.r.t. : 2.treat 3.treat partyid7
+dy/dx w.r.t. : partyid7
 
 ------------------------------------------------------------------------------
              |            Delta-method
              |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-       treat |
-         ic  |     -0.051      0.033    -1.54   0.123       -0.116       0.014
-        irl  |     -0.049      0.033    -1.50   0.134       -0.114       0.015
-             |
-    partyid7 |     -0.024      0.006    -3.74   0.000       -0.037      -0.012
+    partyid7 |     -0.024      0.007    -3.73   0.000       -0.037      -0.012
 ------------------------------------------------------------------------------
-Note: dy/dx for factor levels is the discrete change from the base level.
-
-Average marginal effects                        Number of obs     =      2,005
-Model VCE    : Robust
-
-Expression   : Linear prediction, predict()
-dy/dx w.r.t. : 1.treat 3.treat partyid7
-
-------------------------------------------------------------------------------
-             |            Delta-method
-             |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-       treat |
-         mc  |      0.051      0.033     1.54   0.123       -0.014       0.116
-        irl  |      0.002      0.032     0.05   0.963       -0.062       0.065
-             |
-    partyid7 |     -0.024      0.006    -3.74   0.000       -0.037      -0.012
-------------------------------------------------------------------------------
-Note: dy/dx for factor levels is the discrete change from the base level.
 (sum of wgt is 2,003.3937954824)
 
 Linear regression                               Number of obs     =      2,005
@@ -839,7 +847,7 @@ Average marginal effects                        Number of obs     =      2,005
 Model VCE    : Robust
 
 Expression   : Linear prediction, predict()
-dy/dx w.r.t. : 2.treat 3.treat partyid7
+dy/dx w.r.t. : 2.treat 3.treat
 
 ------------------------------------------------------------------------------
              |            Delta-method
@@ -848,8 +856,6 @@ dy/dx w.r.t. : 2.treat 3.treat partyid7
        treat |
          ic  |     -0.051      0.033    -1.54   0.124       -0.116       0.014
         irl  |     -0.049      0.033    -1.49   0.136       -0.112       0.015
-             |
-    partyid7 |     -0.024      0.006    -3.77   0.000       -0.036      -0.012
 ------------------------------------------------------------------------------
 Note: dy/dx for factor levels is the discrete change from the base level.
 
@@ -857,7 +863,7 @@ Average marginal effects                        Number of obs     =      2,005
 Model VCE    : Robust
 
 Expression   : Linear prediction, predict()
-dy/dx w.r.t. : 1.treat 3.treat partyid7
+dy/dx w.r.t. : 1.treat 3.treat
 
 ------------------------------------------------------------------------------
              |            Delta-method
@@ -866,8 +872,90 @@ dy/dx w.r.t. : 1.treat 3.treat partyid7
        treat |
          mc  |      0.051      0.033     1.54   0.124       -0.014       0.116
         irl  |      0.002      0.032     0.07   0.944       -0.061       0.066
-             |
+------------------------------------------------------------------------------
+Note: dy/dx for factor levels is the discrete change from the base level.
+
+Average marginal effects                        Number of obs     =      2,005
+Model VCE    : Robust
+
+Expression   : Linear prediction, predict()
+dy/dx w.r.t. : partyid7
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
     partyid7 |     -0.024      0.006    -3.77   0.000       -0.036      -0.012
+------------------------------------------------------------------------------
+
+Average marginal effects                        Number of obs     =      2,005
+Model VCE    : Robust
+
+Expression   : Linear prediction, predict()
+dy/dx w.r.t. : partyid7
+
+1._at        : treat           =           1
+
+2._at        : treat           =           2
+
+3._at        : treat           =           3
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+partyid7     |
+         _at |
+          1  |     -0.038      0.011    -3.53   0.000       -0.059      -0.017
+          2  |     -0.021      0.011    -1.99   0.047       -0.043      -0.000
+          3  |     -0.010      0.012    -0.90   0.369       -0.033       0.012
+------------------------------------------------------------------------------
+
+Conditional marginal effects                    Number of obs     =      2,005
+Model VCE    : Robust
+
+Expression   : Linear prediction, predict()
+dy/dx w.r.t. : 2.treat 3.treat
+
+1._at        : partyid7        =           1
+
+2._at        : partyid7        =           2
+
+3._at        : partyid7        =           3
+
+4._at        : partyid7        =           4
+
+5._at        : partyid7        =           5
+
+6._at        : partyid7        =           6
+
+7._at        : partyid7        =           7
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+1.treat      |  (base outcome)
+-------------+----------------------------------------------------------------
+2.treat      |
+         _at |
+          1  |     -0.098      0.060    -1.64   0.101       -0.216       0.019
+          2  |     -0.082      0.048    -1.71   0.088       -0.175       0.012
+          3  |     -0.065      0.038    -1.71   0.087       -0.139       0.009
+          4  |     -0.048      0.033    -1.48   0.139       -0.112       0.016
+          5  |     -0.031      0.034    -0.93   0.353       -0.098       0.035
+          6  |     -0.015      0.041    -0.36   0.720       -0.096       0.066
+          7  |      0.002      0.052     0.04   0.970       -0.100       0.104
+-------------+----------------------------------------------------------------
+3.treat      |
+         _at |
+          1  |     -0.127      0.058    -2.19   0.029       -0.241      -0.013
+          2  |     -0.100      0.046    -2.17   0.030       -0.190      -0.009
+          3  |     -0.072      0.036    -1.97   0.049       -0.143      -0.000
+          4  |     -0.044      0.032    -1.36   0.173       -0.108       0.019
+          5  |     -0.016      0.036    -0.46   0.645       -0.086       0.053
+          6  |      0.011      0.045     0.25   0.799       -0.076       0.099
+          7  |      0.039      0.057     0.69   0.491       -0.072       0.150
 ------------------------------------------------------------------------------
 Note: dy/dx for factor levels is the discrete change from the base level.
 (sum of wgt is 2,011.1671752376)
@@ -938,73 +1026,31 @@ Note: dy/dx for factor levels is the discrete change from the base level.
 (sum of wgt is 2,003.3306699975)
 
 Linear regression                               Number of obs     =      2,002
-                                                F(3, 1998)        =       8.18
+                                                F(1, 2000)        =      19.51
                                                 Prob > F          =     0.0000
-                                                R-squared         =     0.0223
-                                                Root MSE          =     .49419
+                                                R-squared         =     0.0182
+                                                Root MSE          =     .49497
 
 ------------------------------------------------------------------------------
              |               Robust
          lib |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-       treat |
-         ic  |     -0.038      0.038    -1.01   0.314       -0.113       0.036
-        irl  |      0.041      0.038     1.09   0.278       -0.033       0.116
-             |
-    partyid7 |     -0.034      0.008    -4.41   0.000       -0.050      -0.019
-       _cons |      0.659      0.039    16.79   0.000        0.582       0.736
-------------------------------------------------------------------------------
-
-Predictive margins                              Number of obs     =      2,002
-Model VCE    : Robust
-
-Expression   : Linear prediction, predict()
-
-------------------------------------------------------------------------------
-             |            Delta-method
-             |     Margin   Std. Err.      t    P>|t|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-       treat |
-         mc  |      0.526      0.026    20.18   0.000        0.475       0.578
-         ic  |      0.488      0.028    17.63   0.000        0.434       0.542
-        irl  |      0.568      0.028    20.39   0.000        0.513       0.622
+    partyid7 |     -0.035      0.008    -4.42   0.000       -0.050      -0.019
+       _cons |      0.660      0.035    19.10   0.000        0.593       0.728
 ------------------------------------------------------------------------------
 
 Average marginal effects                        Number of obs     =      2,002
 Model VCE    : Robust
 
 Expression   : Linear prediction, predict()
-dy/dx w.r.t. : 2.treat 3.treat partyid7
+dy/dx w.r.t. : partyid7
 
 ------------------------------------------------------------------------------
              |            Delta-method
              |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-       treat |
-         ic  |     -0.038      0.038    -1.01   0.314       -0.113       0.036
-        irl  |      0.041      0.038     1.09   0.278       -0.033       0.116
-             |
-    partyid7 |     -0.034      0.008    -4.41   0.000       -0.050      -0.019
+    partyid7 |     -0.035      0.008    -4.42   0.000       -0.050      -0.019
 ------------------------------------------------------------------------------
-Note: dy/dx for factor levels is the discrete change from the base level.
-
-Average marginal effects                        Number of obs     =      2,002
-Model VCE    : Robust
-
-Expression   : Linear prediction, predict()
-dy/dx w.r.t. : 1.treat 3.treat partyid7
-
-------------------------------------------------------------------------------
-             |            Delta-method
-             |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-       treat |
-         mc  |      0.038      0.038     1.01   0.314       -0.036       0.113
-        irl  |      0.080      0.039     2.03   0.043        0.003       0.157
-             |
-    partyid7 |     -0.034      0.008    -4.41   0.000       -0.050      -0.019
-------------------------------------------------------------------------------
-Note: dy/dx for factor levels is the discrete change from the base level.
 (sum of wgt is 2,003.3306699975)
 
 Linear regression                               Number of obs     =      2,002
@@ -1049,7 +1095,7 @@ Average marginal effects                        Number of obs     =      2,002
 Model VCE    : Robust
 
 Expression   : Linear prediction, predict()
-dy/dx w.r.t. : 2.treat 3.treat partyid7
+dy/dx w.r.t. : 2.treat 3.treat
 
 ------------------------------------------------------------------------------
              |            Delta-method
@@ -1058,8 +1104,6 @@ dy/dx w.r.t. : 2.treat 3.treat partyid7
        treat |
          ic  |     -0.040      0.038    -1.04   0.296       -0.114       0.035
         irl  |      0.040      0.038     1.07   0.285       -0.034       0.114
-             |
-    partyid7 |     -0.034      0.008    -4.36   0.000       -0.049      -0.018
 ------------------------------------------------------------------------------
 Note: dy/dx for factor levels is the discrete change from the base level.
 
@@ -1067,7 +1111,7 @@ Average marginal effects                        Number of obs     =      2,002
 Model VCE    : Robust
 
 Expression   : Linear prediction, predict()
-dy/dx w.r.t. : 1.treat 3.treat partyid7
+dy/dx w.r.t. : 1.treat 3.treat
 
 ------------------------------------------------------------------------------
              |            Delta-method
@@ -1076,8 +1120,90 @@ dy/dx w.r.t. : 1.treat 3.treat partyid7
        treat |
          mc  |      0.040      0.038     1.04   0.296       -0.035       0.114
         irl  |      0.080      0.039     2.06   0.039        0.004       0.156
-             |
+------------------------------------------------------------------------------
+Note: dy/dx for factor levels is the discrete change from the base level.
+
+Average marginal effects                        Number of obs     =      2,002
+Model VCE    : Robust
+
+Expression   : Linear prediction, predict()
+dy/dx w.r.t. : partyid7
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
     partyid7 |     -0.034      0.008    -4.36   0.000       -0.049      -0.018
+------------------------------------------------------------------------------
+
+Average marginal effects                        Number of obs     =      2,002
+Model VCE    : Robust
+
+Expression   : Linear prediction, predict()
+dy/dx w.r.t. : partyid7
+
+1._at        : treat           =           1
+
+2._at        : treat           =           2
+
+3._at        : treat           =           3
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+partyid7     |
+         _at |
+          1  |     -0.028      0.013    -2.20   0.028       -0.053      -0.003
+          2  |     -0.017      0.014    -1.19   0.235       -0.045       0.011
+          3  |     -0.058      0.013    -4.50   0.000       -0.083      -0.033
+------------------------------------------------------------------------------
+
+Conditional marginal effects                    Number of obs     =      2,002
+Model VCE    : Robust
+
+Expression   : Linear prediction, predict()
+dy/dx w.r.t. : 2.treat 3.treat
+
+1._at        : partyid7        =           1
+
+2._at        : partyid7        =           2
+
+3._at        : partyid7        =           3
+
+4._at        : partyid7        =           4
+
+5._at        : partyid7        =           5
+
+6._at        : partyid7        =           6
+
+7._at        : partyid7        =           7
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+1.treat      |  (base outcome)
+-------------+----------------------------------------------------------------
+2.treat      |
+         _at |
+          1  |     -0.070      0.067    -1.04   0.296       -0.202       0.062
+          2  |     -0.060      0.053    -1.13   0.258       -0.163       0.044
+          3  |     -0.049      0.042    -1.17   0.242       -0.130       0.033
+          4  |     -0.038      0.038    -1.00   0.318       -0.113       0.037
+          5  |     -0.027      0.043    -0.63   0.531       -0.113       0.058
+          6  |     -0.016      0.055    -0.30   0.766       -0.125       0.092
+          7  |     -0.006      0.071    -0.08   0.935       -0.144       0.133
+-------------+----------------------------------------------------------------
+3.treat      |
+         _at |
+          1  |      0.125      0.062     2.02   0.043        0.004       0.246
+          2  |      0.095      0.049     1.95   0.051       -0.000       0.191
+          3  |      0.065      0.040     1.64   0.101       -0.013       0.143
+          4  |      0.036      0.038     0.94   0.349       -0.039       0.110
+          5  |      0.006      0.044     0.13   0.897       -0.081       0.092
+          6  |     -0.024      0.056    -0.43   0.665       -0.133       0.085
+          7  |     -0.054      0.070    -0.77   0.441       -0.191       0.083
 ------------------------------------------------------------------------------
 Note: dy/dx for factor levels is the discrete change from the base level.
 
@@ -1091,16 +1217,6 @@ Note: dy/dx for factor levels is the discrete change from the base level.
 docs/ols-margins-without-covariates.xls
 dir : seeout
 
-.  
-. outreg2 [*] ///
->   using docs/ols-margins-without-covariates-wide.xls, ///
->   noaster stats(coef se ci pval) bdec(1) sdec(1) cdec(3)  ///
->   stnum(replace coef=coef*100, replace se=se*100) ///
->   paren(se) bracket(ci) ///
->   sideway excel replace
-docs/ols-margins-without-covariates-wide.xls
-dir : seeout
-
 . 
 . estimates clear
 
@@ -1112,7 +1228,7 @@ dir : seeout
 . logit `dom' b1.treat [pweight=weight]
   3. estimates store `dom'_r1
   4. 
-. logit `dom' b1.treat c.partyid7 [pweight=weight]
+. logit `dom' c.partyid7 [pweight=weight]
   5. estimates store `dom'_r2
   6. 
 . logit `dom' b1.treat##c.partyid7 [pweight=weight]
@@ -1142,25 +1258,21 @@ Log pseudolikelihood = -1381.6128               Pseudo R2         =     0.0031
 ------------------------------------------------------------------------------
 
 Iteration 0:   log pseudolikelihood = -1380.5082  
-Iteration 1:   log pseudolikelihood = -1372.1556  
-Iteration 2:   log pseudolikelihood = -1372.1544  
-Iteration 3:   log pseudolikelihood = -1372.1544  
+Iteration 1:   log pseudolikelihood = -1376.0711  
+Iteration 2:   log pseudolikelihood = -1376.0708  
+Iteration 3:   log pseudolikelihood = -1376.0708  
 
 Logistic regression                             Number of obs     =      2,009
-                                                Wald chi2(3)      =       8.76
-                                                Prob > chi2       =     0.0326
-Log pseudolikelihood = -1372.1544               Pseudo R2         =     0.0061
+                                                Wald chi2(1)      =       4.49
+                                                Prob > chi2       =     0.0341
+Log pseudolikelihood = -1376.0708               Pseudo R2         =     0.0032
 
 ------------------------------------------------------------------------------
              |               Robust
          spk |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-       treat |
-         ic  |     -0.303      0.153    -1.98   0.047       -0.603      -0.004
-        irl  |     -0.127      0.159    -0.80   0.423       -0.438       0.184
-             |
-    partyid7 |     -0.068      0.033    -2.09   0.037       -0.132      -0.004
-       _cons |      0.186      0.161     1.15   0.249       -0.130       0.502
+    partyid7 |     -0.069      0.033    -2.12   0.034       -0.133      -0.005
+       _cons |      0.051      0.144     0.35   0.723       -0.231       0.333
 ------------------------------------------------------------------------------
 
 Iteration 0:   log pseudolikelihood = -1380.5082  
@@ -1212,25 +1324,21 @@ Log pseudolikelihood = -1127.0183               Pseudo R2         =     0.0031
 ------------------------------------------------------------------------------
 
 Iteration 0:   log pseudolikelihood = -1122.4494  
-Iteration 1:   log pseudolikelihood = -1107.3733  
-Iteration 2:   log pseudolikelihood = -1107.2952  
-Iteration 3:   log pseudolikelihood = -1107.2952  
+Iteration 1:   log pseudolikelihood = -1110.4121  
+Iteration 2:   log pseudolikelihood = -1110.3611  
+Iteration 3:   log pseudolikelihood = -1110.3611  
 
 Logistic regression                             Number of obs     =      2,005
-                                                Wald chi2(3)      =      16.80
-                                                Prob > chi2       =     0.0008
-Log pseudolikelihood = -1107.2952               Pseudo R2         =     0.0135
+                                                Wald chi2(1)      =      13.58
+                                                Prob > chi2       =     0.0002
+Log pseudolikelihood = -1110.3611               Pseudo R2         =     0.0108
 
 ------------------------------------------------------------------------------
              |               Robust
          col |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-       treat |
-         ic  |     -0.269      0.177    -1.52   0.130       -0.616       0.079
-        irl  |     -0.263      0.176    -1.49   0.136       -0.608       0.082
-             |
-    partyid7 |     -0.132      0.036    -3.70   0.000       -0.202      -0.062
-       _cons |     -0.451      0.177    -2.55   0.011       -0.798      -0.104
+    partyid7 |     -0.133      0.036    -3.68   0.000       -0.204      -0.062
+       _cons |     -0.615      0.152    -4.05   0.000       -0.912      -0.318
 ------------------------------------------------------------------------------
 
 Iteration 0:   log pseudolikelihood = -1122.4494  
@@ -1281,25 +1389,21 @@ Log pseudolikelihood = -1387.2688               Pseudo R2         =     0.0030
 ------------------------------------------------------------------------------
 
 Iteration 0:   log pseudolikelihood = -1385.7829  
-Iteration 1:   log pseudolikelihood = -1363.2574  
-Iteration 2:   log pseudolikelihood = -1363.2503  
-Iteration 3:   log pseudolikelihood = -1363.2503  
+Iteration 1:   log pseudolikelihood = -1367.4214  
+Iteration 2:   log pseudolikelihood = -1367.4188  
+Iteration 3:   log pseudolikelihood = -1367.4188  
 
 Logistic regression                             Number of obs     =      2,002
-                                                Wald chi2(3)      =      23.00
+                                                Wald chi2(1)      =      18.69
                                                 Prob > chi2       =     0.0000
-Log pseudolikelihood = -1363.2503               Pseudo R2         =     0.0163
+Log pseudolikelihood = -1367.4188               Pseudo R2         =     0.0133
 
 ------------------------------------------------------------------------------
              |               Robust
          lib |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-       treat |
-         ic  |     -0.156      0.155    -1.01   0.314       -0.460       0.148
-        irl  |      0.170      0.157     1.08   0.279       -0.138       0.479
-             |
-    partyid7 |     -0.140      0.032    -4.32   0.000       -0.204      -0.077
-       _cons |      0.647      0.163     3.96   0.000        0.327       0.967
+    partyid7 |     -0.141      0.033    -4.32   0.000       -0.205      -0.077
+       _cons |      0.651      0.144     4.51   0.000        0.368       0.933
 ------------------------------------------------------------------------------
 
 Iteration 0:   log pseudolikelihood = -1385.7829  
@@ -1336,13 +1440,13 @@ treat#c.partyid7 |
         name | command      depvar       npar  title 
 -------------+-----------------------------------------
       spk_r1 | logit        spk             4  
-      spk_r2 | logit        spk             5  
+      spk_r2 | logit        spk             2  
       spk_r3 | logit        spk             8  
       col_r1 | logit        col             4  
-      col_r2 | logit        col             5  
+      col_r2 | logit        col             2  
       col_r3 | logit        col             8  
       lib_r1 | logit        lib             4  
-      lib_r2 | logit        lib             5  
+      lib_r2 | logit        lib             2  
       lib_r3 | logit        lib             8  
 -------------------------------------------------------
 
@@ -1365,32 +1469,35 @@ dir : seeout
   3.   margins b1.treat, post
   4.   estimates store `dom'_r1
   5.     quietly logit `dom' b1.treat [pweight=weight]
-  6.     margins, dydx(*) post
+  6.     margins, dydx(b1.treat) post
   7.     estimates store `dom'_r1d1
   8.     quietly logit `dom' b2.treat [pweight=weight]
-  9.     margins, dydx(*) post
+  9.     margins, dydx(b2.treat) post
  10.     estimates store `dom'_r1d2
  11. 
-. logit `dom' b1.treat c.partyid7 [pweight=weight]
- 12.   margins b1.treat, post
+. logit `dom' c.partyid7 [pweight=weight]
+ 12.   margins, dydx(c.partyid7) post
  13.   estimates store `dom'_r2
- 14.     quietly logit `dom' b1.treat c.partyid7 [pweight=weight]
- 15.     margins, dydx(*) post
- 16.     estimates store `dom'_r2d1
- 17.         quietly logit `dom' b2.treat c.partyid7 [pweight=weight]
- 18.     margins, dydx(*) post
- 19.     estimates store `dom'_r2d2
- 20. 
+ 14.    
 . logit `dom' b1.treat##c.partyid7 [pweight=weight]
- 21.   margins b1.treat, post
- 22.   estimates store `dom'_r3
- 23.     quietly logit `dom' b1.treat##c.partyid7 [pweight=weight]
- 24.     margins, dydx(*) post
- 25.     estimates store `dom'_r3d1
- 26.         quietly logit `dom' b2.treat##c.partyid7 [pweight=weight]
- 27.     margins, dydx(*) post
- 28.     estimates store `dom'_r3d2
- 29. 
+ 15.   margins b1.treat, post
+ 16.   estimates store `dom'_r3
+ 17.     quietly logit `dom' b1.treat##c.partyid7 [pweight=weight]
+ 18.     margins, dydx(b1.treat) post
+ 19.     estimates store `dom'_r3d1
+ 20.     quietly logit `dom' b2.treat##c.partyid7 [pweight=weight]
+ 21.     margins, dydx(b2.treat) post
+ 22.     estimates store `dom'_r3d2
+ 23.   quietly logit `dom' b1.treat##c.partyid7 [pweight=weight]
+ 24.     margins, dydx(c.partyid7) post
+ 25.     estimates store `dom'_r4
+ 26.   quietly logit `dom' b1.treat##c.partyid7 [pweight=weight]
+ 27.     margins, dydx(partyid7) at(treat = (1(1)3)) post
+ 28.     estimates store `dom'_r5
+ 29.   quietly logit `dom' b1.treat##c.partyid7 [pweight=weight] 
+ 30.     margins, dydx(b1.treat) at(partyid = (1(1)7)) post
+ 31.     estimates store `dom'_r6
+ 32. 
 . }
 
 Iteration 0:   log pseudolikelihood = -1385.8683  
@@ -1462,77 +1569,35 @@ dy/dx w.r.t. : 1.treat 3.treat
 Note: dy/dx for factor levels is the discrete change from the base level.
 
 Iteration 0:   log pseudolikelihood = -1380.5082  
-Iteration 1:   log pseudolikelihood = -1372.1556  
-Iteration 2:   log pseudolikelihood = -1372.1544  
-Iteration 3:   log pseudolikelihood = -1372.1544  
+Iteration 1:   log pseudolikelihood = -1376.0711  
+Iteration 2:   log pseudolikelihood = -1376.0708  
+Iteration 3:   log pseudolikelihood = -1376.0708  
 
 Logistic regression                             Number of obs     =      2,009
-                                                Wald chi2(3)      =       8.76
-                                                Prob > chi2       =     0.0326
-Log pseudolikelihood = -1372.1544               Pseudo R2         =     0.0061
+                                                Wald chi2(1)      =       4.49
+                                                Prob > chi2       =     0.0341
+Log pseudolikelihood = -1376.0708               Pseudo R2         =     0.0032
 
 ------------------------------------------------------------------------------
              |               Robust
          spk |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-       treat |
-         ic  |     -0.303      0.153    -1.98   0.047       -0.603      -0.004
-        irl  |     -0.127      0.159    -0.80   0.423       -0.438       0.184
-             |
-    partyid7 |     -0.068      0.033    -2.09   0.037       -0.132      -0.004
-       _cons |      0.186      0.161     1.15   0.249       -0.130       0.502
-------------------------------------------------------------------------------
-
-Predictive margins                              Number of obs     =      2,009
-Model VCE    : Robust
-
-Expression   : Pr(spk), predict()
-
-------------------------------------------------------------------------------
-             |            Delta-method
-             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-       treat |
-         mc  |      0.481      0.026    18.44   0.000        0.430       0.532
-         ic  |      0.407      0.027    15.24   0.000        0.354       0.459
-        irl  |      0.450      0.029    15.35   0.000        0.392       0.507
+    partyid7 |     -0.069      0.033    -2.12   0.034       -0.133      -0.005
+       _cons |      0.051      0.144     0.35   0.723       -0.231       0.333
 ------------------------------------------------------------------------------
 
 Average marginal effects                        Number of obs     =      2,009
 Model VCE    : Robust
 
 Expression   : Pr(spk), predict()
-dy/dx w.r.t. : 2.treat 3.treat partyid7
+dy/dx w.r.t. : partyid7
 
 ------------------------------------------------------------------------------
              |            Delta-method
              |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-       treat |
-         ic  |     -0.074      0.037    -1.99   0.046       -0.148      -0.001
-        irl  |     -0.031      0.039    -0.80   0.422       -0.108       0.045
-             |
-    partyid7 |     -0.017      0.008    -2.10   0.036       -0.032      -0.001
+    partyid7 |     -0.017      0.008    -2.13   0.033       -0.033      -0.001
 ------------------------------------------------------------------------------
-Note: dy/dx for factor levels is the discrete change from the base level.
-
-Average marginal effects                        Number of obs     =      2,009
-Model VCE    : Robust
-
-Expression   : Pr(spk), predict()
-dy/dx w.r.t. : 1.treat 3.treat partyid7
-
-------------------------------------------------------------------------------
-             |            Delta-method
-             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-       treat |
-         mc  |      0.074      0.037     1.99   0.046        0.001       0.148
-        irl  |      0.043      0.040     1.08   0.279       -0.035       0.121
-             |
-    partyid7 |     -0.017      0.008    -2.10   0.036       -0.032      -0.001
-------------------------------------------------------------------------------
-Note: dy/dx for factor levels is the discrete change from the base level.
 
 Iteration 0:   log pseudolikelihood = -1380.5082  
 Iteration 1:   log pseudolikelihood =  -1371.398  
@@ -1580,7 +1645,7 @@ Average marginal effects                        Number of obs     =      2,009
 Model VCE    : Robust
 
 Expression   : Pr(spk), predict()
-dy/dx w.r.t. : 2.treat 3.treat partyid7
+dy/dx w.r.t. : 2.treat 3.treat
 
 ------------------------------------------------------------------------------
              |            Delta-method
@@ -1589,8 +1654,6 @@ dy/dx w.r.t. : 2.treat 3.treat partyid7
        treat |
          ic  |     -0.074      0.037    -1.98   0.047       -0.147      -0.001
         irl  |     -0.032      0.039    -0.81   0.417       -0.108       0.045
-             |
-    partyid7 |     -0.017      0.008    -2.19   0.029       -0.033      -0.002
 ------------------------------------------------------------------------------
 Note: dy/dx for factor levels is the discrete change from the base level.
 
@@ -1598,7 +1661,7 @@ Average marginal effects                        Number of obs     =      2,009
 Model VCE    : Robust
 
 Expression   : Pr(spk), predict()
-dy/dx w.r.t. : 1.treat 3.treat partyid7
+dy/dx w.r.t. : 1.treat 3.treat
 
 ------------------------------------------------------------------------------
              |            Delta-method
@@ -1607,8 +1670,90 @@ dy/dx w.r.t. : 1.treat 3.treat partyid7
        treat |
          mc  |      0.074      0.037     1.98   0.047        0.001       0.147
         irl  |      0.042      0.040     1.07   0.286       -0.035       0.120
-             |
+------------------------------------------------------------------------------
+Note: dy/dx for factor levels is the discrete change from the base level.
+
+Average marginal effects                        Number of obs     =      2,009
+Model VCE    : Robust
+
+Expression   : Pr(spk), predict()
+dy/dx w.r.t. : partyid7
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
     partyid7 |     -0.017      0.008    -2.19   0.029       -0.033      -0.002
+------------------------------------------------------------------------------
+
+Average marginal effects                        Number of obs     =      2,009
+Model VCE    : Robust
+
+Expression   : Pr(spk), predict()
+dy/dx w.r.t. : partyid7
+
+1._at        : treat           =           1
+
+2._at        : treat           =           2
+
+3._at        : treat           =           3
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+partyid7     |
+         _at |
+          1  |     -0.009      0.012    -0.71   0.478       -0.033       0.016
+          2  |     -0.025      0.013    -1.88   0.059       -0.051       0.001
+          3  |     -0.019      0.015    -1.21   0.225       -0.049       0.012
+------------------------------------------------------------------------------
+
+Conditional marginal effects                    Number of obs     =      2,009
+Model VCE    : Robust
+
+Expression   : Pr(spk), predict()
+dy/dx w.r.t. : 2.treat 3.treat
+
+1._at        : partyid7        =           1
+
+2._at        : partyid7        =           2
+
+3._at        : partyid7        =           3
+
+4._at        : partyid7        =           4
+
+5._at        : partyid7        =           5
+
+6._at        : partyid7        =           6
+
+7._at        : partyid7        =           7
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+1.treat      |  (base outcome)
+-------------+----------------------------------------------------------------
+2.treat      |
+         _at |
+          1  |     -0.026      0.066    -0.40   0.691       -0.157       0.104
+          2  |     -0.044      0.052    -0.84   0.399       -0.145       0.058
+          3  |     -0.061      0.041    -1.48   0.139       -0.141       0.020
+          4  |     -0.078      0.037    -2.07   0.038       -0.151      -0.004
+          5  |     -0.094      0.042    -2.22   0.027       -0.177      -0.011
+          6  |     -0.109      0.053    -2.07   0.038       -0.213      -0.006
+          7  |     -0.124      0.066    -1.89   0.059       -0.253       0.005
+-------------+----------------------------------------------------------------
+3.treat      |
+         _at |
+          1  |     -0.003      0.072    -0.05   0.963       -0.144       0.137
+          2  |     -0.013      0.056    -0.24   0.809       -0.123       0.096
+          3  |     -0.024      0.044    -0.54   0.590       -0.110       0.062
+          4  |     -0.034      0.039    -0.86   0.390       -0.110       0.043
+          5  |     -0.043      0.044    -0.99   0.323       -0.130       0.043
+          6  |     -0.053      0.056    -0.96   0.339       -0.162       0.056
+          7  |     -0.063      0.071    -0.89   0.375       -0.201       0.076
 ------------------------------------------------------------------------------
 Note: dy/dx for factor levels is the discrete change from the base level.
 
@@ -1681,77 +1826,35 @@ dy/dx w.r.t. : 1.treat 3.treat
 Note: dy/dx for factor levels is the discrete change from the base level.
 
 Iteration 0:   log pseudolikelihood = -1122.4494  
-Iteration 1:   log pseudolikelihood = -1107.3733  
-Iteration 2:   log pseudolikelihood = -1107.2952  
-Iteration 3:   log pseudolikelihood = -1107.2952  
+Iteration 1:   log pseudolikelihood = -1110.4121  
+Iteration 2:   log pseudolikelihood = -1110.3611  
+Iteration 3:   log pseudolikelihood = -1110.3611  
 
 Logistic regression                             Number of obs     =      2,005
-                                                Wald chi2(3)      =      16.80
-                                                Prob > chi2       =     0.0008
-Log pseudolikelihood = -1107.2952               Pseudo R2         =     0.0135
+                                                Wald chi2(1)      =      13.58
+                                                Prob > chi2       =     0.0002
+Log pseudolikelihood = -1110.3611               Pseudo R2         =     0.0108
 
 ------------------------------------------------------------------------------
              |               Robust
          col |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-       treat |
-         ic  |     -0.269      0.177    -1.52   0.130       -0.616       0.079
-        irl  |     -0.263      0.176    -1.49   0.136       -0.608       0.082
-             |
-    partyid7 |     -0.132      0.036    -3.70   0.000       -0.202      -0.062
-       _cons |     -0.451      0.177    -2.55   0.011       -0.798      -0.104
-------------------------------------------------------------------------------
-
-Predictive margins                              Number of obs     =      2,005
-Model VCE    : Robust
-
-Expression   : Pr(col), predict()
-
-------------------------------------------------------------------------------
-             |            Delta-method
-             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-       treat |
-         mc  |      0.280      0.024    11.88   0.000        0.234       0.326
-         ic  |      0.230      0.023     9.95   0.000        0.184       0.275
-        irl  |      0.231      0.023    10.10   0.000        0.186       0.276
+    partyid7 |     -0.133      0.036    -3.68   0.000       -0.204      -0.062
+       _cons |     -0.615      0.152    -4.05   0.000       -0.912      -0.318
 ------------------------------------------------------------------------------
 
 Average marginal effects                        Number of obs     =      2,005
 Model VCE    : Robust
 
 Expression   : Pr(col), predict()
-dy/dx w.r.t. : 2.treat 3.treat partyid7
+dy/dx w.r.t. : partyid7
 
 ------------------------------------------------------------------------------
              |            Delta-method
              |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-       treat |
-         ic  |     -0.050      0.033    -1.52   0.128       -0.115       0.014
-        irl  |     -0.049      0.033    -1.50   0.134       -0.114       0.015
-             |
-    partyid7 |     -0.024      0.007    -3.73   0.000       -0.037      -0.012
+    partyid7 |     -0.024      0.007    -3.72   0.000       -0.037      -0.012
 ------------------------------------------------------------------------------
-Note: dy/dx for factor levels is the discrete change from the base level.
-
-Average marginal effects                        Number of obs     =      2,005
-Model VCE    : Robust
-
-Expression   : Pr(col), predict()
-dy/dx w.r.t. : 1.treat 3.treat partyid7
-
-------------------------------------------------------------------------------
-             |            Delta-method
-             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-       treat |
-         mc  |      0.050      0.033     1.52   0.128       -0.014       0.115
-        irl  |      0.001      0.033     0.03   0.974       -0.063       0.065
-             |
-    partyid7 |     -0.024      0.007    -3.73   0.000       -0.037      -0.012
-------------------------------------------------------------------------------
-Note: dy/dx for factor levels is the discrete change from the base level.
 
 Iteration 0:   log pseudolikelihood = -1122.4494  
 Iteration 1:   log pseudolikelihood = -1105.2356  
@@ -1799,7 +1902,7 @@ Average marginal effects                        Number of obs     =      2,005
 Model VCE    : Robust
 
 Expression   : Pr(col), predict()
-dy/dx w.r.t. : 2.treat 3.treat partyid7
+dy/dx w.r.t. : 2.treat 3.treat
 
 ------------------------------------------------------------------------------
              |            Delta-method
@@ -1808,8 +1911,6 @@ dy/dx w.r.t. : 2.treat 3.treat partyid7
        treat |
          ic  |     -0.050      0.033    -1.51   0.130       -0.115       0.015
         irl  |     -0.048      0.033    -1.48   0.140       -0.112       0.016
-             |
-    partyid7 |     -0.024      0.006    -3.77   0.000       -0.037      -0.012
 ------------------------------------------------------------------------------
 Note: dy/dx for factor levels is the discrete change from the base level.
 
@@ -1817,7 +1918,7 @@ Average marginal effects                        Number of obs     =      2,005
 Model VCE    : Robust
 
 Expression   : Pr(col), predict()
-dy/dx w.r.t. : 1.treat 3.treat partyid7
+dy/dx w.r.t. : 1.treat 3.treat
 
 ------------------------------------------------------------------------------
              |            Delta-method
@@ -1826,8 +1927,90 @@ dy/dx w.r.t. : 1.treat 3.treat partyid7
        treat |
          mc  |      0.050      0.033     1.51   0.130       -0.015       0.115
         irl  |      0.002      0.032     0.06   0.953       -0.061       0.065
-             |
+------------------------------------------------------------------------------
+Note: dy/dx for factor levels is the discrete change from the base level.
+
+Average marginal effects                        Number of obs     =      2,005
+Model VCE    : Robust
+
+Expression   : Pr(col), predict()
+dy/dx w.r.t. : partyid7
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
     partyid7 |     -0.024      0.006    -3.77   0.000       -0.037      -0.012
+------------------------------------------------------------------------------
+
+Average marginal effects                        Number of obs     =      2,005
+Model VCE    : Robust
+
+Expression   : Pr(col), predict()
+dy/dx w.r.t. : partyid7
+
+1._at        : treat           =           1
+
+2._at        : treat           =           2
+
+3._at        : treat           =           3
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+partyid7     |
+         _at |
+          1  |     -0.038      0.011    -3.54   0.000       -0.059      -0.017
+          2  |     -0.022      0.011    -1.98   0.048       -0.043      -0.000
+          3  |     -0.010      0.012    -0.90   0.369       -0.033       0.012
+------------------------------------------------------------------------------
+
+Conditional marginal effects                    Number of obs     =      2,005
+Model VCE    : Robust
+
+Expression   : Pr(col), predict()
+dy/dx w.r.t. : 2.treat 3.treat
+
+1._at        : partyid7        =           1
+
+2._at        : partyid7        =           2
+
+3._at        : partyid7        =           3
+
+4._at        : partyid7        =           4
+
+5._at        : partyid7        =           5
+
+6._at        : partyid7        =           6
+
+7._at        : partyid7        =           7
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+1.treat      |  (base outcome)
+-------------+----------------------------------------------------------------
+2.treat      |
+         _at |
+          1  |     -0.102      0.064    -1.59   0.111       -0.227       0.024
+          2  |     -0.081      0.048    -1.69   0.092       -0.175       0.013
+          3  |     -0.061      0.037    -1.66   0.098       -0.134       0.011
+          4  |     -0.044      0.033    -1.31   0.190       -0.109       0.022
+          5  |     -0.028      0.036    -0.78   0.435       -0.098       0.042
+          6  |     -0.014      0.041    -0.35   0.727       -0.094       0.066
+          7  |     -0.003      0.046    -0.06   0.951       -0.093       0.088
+-------------+----------------------------------------------------------------
+3.treat      |
+         _at |
+          1  |     -0.134      0.061    -2.19   0.028       -0.253      -0.014
+          2  |     -0.099      0.046    -2.17   0.030       -0.189      -0.009
+          3  |     -0.067      0.036    -1.88   0.061       -0.138       0.003
+          4  |     -0.038      0.033    -1.14   0.254       -0.103       0.027
+          5  |     -0.012      0.037    -0.31   0.754       -0.085       0.061
+          6  |      0.011      0.044     0.25   0.800       -0.076       0.098
+          7  |      0.031      0.052     0.59   0.553       -0.071       0.133
 ------------------------------------------------------------------------------
 Note: dy/dx for factor levels is the discrete change from the base level.
 
@@ -1899,77 +2082,35 @@ dy/dx w.r.t. : 1.treat 3.treat
 Note: dy/dx for factor levels is the discrete change from the base level.
 
 Iteration 0:   log pseudolikelihood = -1385.7829  
-Iteration 1:   log pseudolikelihood = -1363.2574  
-Iteration 2:   log pseudolikelihood = -1363.2503  
-Iteration 3:   log pseudolikelihood = -1363.2503  
+Iteration 1:   log pseudolikelihood = -1367.4214  
+Iteration 2:   log pseudolikelihood = -1367.4188  
+Iteration 3:   log pseudolikelihood = -1367.4188  
 
 Logistic regression                             Number of obs     =      2,002
-                                                Wald chi2(3)      =      23.00
+                                                Wald chi2(1)      =      18.69
                                                 Prob > chi2       =     0.0000
-Log pseudolikelihood = -1363.2503               Pseudo R2         =     0.0163
+Log pseudolikelihood = -1367.4188               Pseudo R2         =     0.0133
 
 ------------------------------------------------------------------------------
              |               Robust
          lib |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-       treat |
-         ic  |     -0.156      0.155    -1.01   0.314       -0.460       0.148
-        irl  |      0.170      0.157     1.08   0.279       -0.138       0.479
-             |
-    partyid7 |     -0.140      0.032    -4.32   0.000       -0.204      -0.077
-       _cons |      0.647      0.163     3.96   0.000        0.327       0.967
-------------------------------------------------------------------------------
-
-Predictive margins                              Number of obs     =      2,002
-Model VCE    : Robust
-
-Expression   : Pr(lib), predict()
-
-------------------------------------------------------------------------------
-             |            Delta-method
-             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-       treat |
-         mc  |      0.526      0.026    20.17   0.000        0.475       0.578
-         ic  |      0.488      0.028    17.68   0.000        0.434       0.542
-        irl  |      0.568      0.028    20.36   0.000        0.513       0.623
+    partyid7 |     -0.141      0.033    -4.32   0.000       -0.205      -0.077
+       _cons |      0.651      0.144     4.51   0.000        0.368       0.933
 ------------------------------------------------------------------------------
 
 Average marginal effects                        Number of obs     =      2,002
 Model VCE    : Robust
 
 Expression   : Pr(lib), predict()
-dy/dx w.r.t. : 2.treat 3.treat partyid7
+dy/dx w.r.t. : partyid7
 
 ------------------------------------------------------------------------------
              |            Delta-method
              |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-       treat |
-         ic  |     -0.038      0.038    -1.01   0.314       -0.113       0.036
-        irl  |      0.041      0.038     1.09   0.278       -0.033       0.116
-             |
-    partyid7 |     -0.034      0.008    -4.48   0.000       -0.049      -0.019
+    partyid7 |     -0.035      0.008    -4.49   0.000       -0.050      -0.019
 ------------------------------------------------------------------------------
-Note: dy/dx for factor levels is the discrete change from the base level.
-
-Average marginal effects                        Number of obs     =      2,002
-Model VCE    : Robust
-
-Expression   : Pr(lib), predict()
-dy/dx w.r.t. : 1.treat 3.treat partyid7
-
-------------------------------------------------------------------------------
-             |            Delta-method
-             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-       treat |
-         mc  |      0.038      0.038     1.01   0.314       -0.036       0.113
-        irl  |      0.080      0.039     2.03   0.042        0.003       0.157
-             |
-    partyid7 |     -0.034      0.008    -4.48   0.000       -0.049      -0.019
-------------------------------------------------------------------------------
-Note: dy/dx for factor levels is the discrete change from the base level.
 
 Iteration 0:   log pseudolikelihood = -1385.7829  
 Iteration 1:   log pseudolikelihood = -1358.7639  
@@ -2017,7 +2158,7 @@ Average marginal effects                        Number of obs     =      2,002
 Model VCE    : Robust
 
 Expression   : Pr(lib), predict()
-dy/dx w.r.t. : 2.treat 3.treat partyid7
+dy/dx w.r.t. : 2.treat 3.treat
 
 ------------------------------------------------------------------------------
              |            Delta-method
@@ -2026,8 +2167,6 @@ dy/dx w.r.t. : 2.treat 3.treat partyid7
        treat |
          ic  |     -0.040      0.038    -1.05   0.295       -0.114       0.035
         irl  |      0.041      0.038     1.07   0.283       -0.033       0.114
-             |
-    partyid7 |     -0.033      0.007    -4.41   0.000       -0.048      -0.018
 ------------------------------------------------------------------------------
 Note: dy/dx for factor levels is the discrete change from the base level.
 
@@ -2035,7 +2174,7 @@ Average marginal effects                        Number of obs     =      2,002
 Model VCE    : Robust
 
 Expression   : Pr(lib), predict()
-dy/dx w.r.t. : 1.treat 3.treat partyid7
+dy/dx w.r.t. : 1.treat 3.treat
 
 ------------------------------------------------------------------------------
              |            Delta-method
@@ -2044,8 +2183,90 @@ dy/dx w.r.t. : 1.treat 3.treat partyid7
        treat |
          mc  |      0.040      0.038     1.05   0.295       -0.035       0.114
         irl  |      0.080      0.039     2.07   0.039        0.004       0.156
-             |
+------------------------------------------------------------------------------
+Note: dy/dx for factor levels is the discrete change from the base level.
+
+Average marginal effects                        Number of obs     =      2,002
+Model VCE    : Robust
+
+Expression   : Pr(lib), predict()
+dy/dx w.r.t. : partyid7
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
     partyid7 |     -0.033      0.007    -4.41   0.000       -0.048      -0.018
+------------------------------------------------------------------------------
+
+Average marginal effects                        Number of obs     =      2,002
+Model VCE    : Robust
+
+Expression   : Pr(lib), predict()
+dy/dx w.r.t. : partyid7
+
+1._at        : treat           =           1
+
+2._at        : treat           =           2
+
+3._at        : treat           =           3
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+partyid7     |
+         _at |
+          1  |     -0.028      0.012    -2.22   0.026       -0.052      -0.003
+          2  |     -0.017      0.014    -1.19   0.232       -0.045       0.011
+          3  |     -0.056      0.012    -4.70   0.000       -0.080      -0.033
+------------------------------------------------------------------------------
+
+Conditional marginal effects                    Number of obs     =      2,002
+Model VCE    : Robust
+
+Expression   : Pr(lib), predict()
+dy/dx w.r.t. : 2.treat 3.treat
+
+1._at        : partyid7        =           1
+
+2._at        : partyid7        =           2
+
+3._at        : partyid7        =           3
+
+4._at        : partyid7        =           4
+
+5._at        : partyid7        =           5
+
+6._at        : partyid7        =           6
+
+7._at        : partyid7        =           7
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+1.treat      |  (base outcome)
+-------------+----------------------------------------------------------------
+2.treat      |
+         _at |
+          1  |     -0.070      0.067    -1.05   0.296       -0.200       0.061
+          2  |     -0.060      0.053    -1.13   0.257       -0.163       0.044
+          3  |     -0.049      0.042    -1.17   0.241       -0.131       0.033
+          4  |     -0.038      0.038    -1.00   0.317       -0.113       0.037
+          5  |     -0.027      0.044    -0.63   0.531       -0.113       0.058
+          6  |     -0.016      0.055    -0.29   0.769       -0.125       0.092
+          7  |     -0.005      0.070    -0.08   0.939       -0.143       0.132
+-------------+----------------------------------------------------------------
+3.treat      |
+         _at |
+          1  |      0.120      0.059     2.03   0.042        0.004       0.237
+          2  |      0.097      0.050     1.96   0.051       -0.000       0.194
+          3  |      0.069      0.041     1.67   0.095       -0.012       0.151
+          4  |      0.039      0.039     0.99   0.324       -0.038       0.115
+          5  |      0.006      0.045     0.14   0.885       -0.082       0.094
+          6  |     -0.026      0.056    -0.46   0.646       -0.136       0.084
+          7  |     -0.057      0.069    -0.82   0.414       -0.192       0.079
 ------------------------------------------------------------------------------
 Note: dy/dx for factor levels is the discrete change from the base level.
 
@@ -2060,20 +2281,10 @@ docs/logit-margins-without-covariates.xls
 dir : seeout
 
 . 
-. outreg2 [*] ///
->   using docs/logit-margins-without-covariates-wide.xls, ///
->   noaster stats(coef se ci pval) bdec(1) sdec(1) cdec(3)  ///
->   stnum(replace coef=coef*100, replace se=se*100) ///
->   paren(se) bracket(ci) ///
->   sideway excel replace
-docs/logit-margins-without-covariates-wide.xls
-dir : seeout
-
-. 
 . log close
       name:  <unnamed>
-       log:  /Users/smorgan/Documents/GitHub/tess-civil-liberties/log/analyze-experimental-results-without-covariates.lo
-> g
+       log:  /Users/stephenmorgan/GitHub/tess-civil-liberties/log/analyze-experimental-results-without-covariates.l
+> og
   log type:  text
- closed on:  15 Mar 2019, 14:46:26
-------------------------------------------------------------------------------------------------------------------------
+ closed on:  16 Mar 2019, 14:46:03
+-------------------------------------------------------------------------------------------------------------------
